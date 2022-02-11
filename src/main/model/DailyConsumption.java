@@ -31,14 +31,6 @@ public class DailyConsumption {
         }
     }
 
-    //REQUIRES:FoodItem is in the food list
-    //MODIFIES: this
-    //EFFECTS: when a food is removed, the food item should be removed from food list, also the food calories should be
-    //           added back to the remaining calories
-
-    public void removeFoodItem(){
-    //maybe write this in second phase
-    }
 
     //EFFECTS:return the current remaining calories
     public double getRemainingCalories() {

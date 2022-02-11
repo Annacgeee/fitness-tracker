@@ -14,7 +14,7 @@ public class PhysicalInfo {
     private ArrayList<Double> kgToLosePerWeek; // create a list to store week lose weight goal in kg
 
 
-    //REQUIRES:weight, height, age must >0
+    //REQUIRES:weight, height, age must >0，gender has to be F or M
     //MODIFIES: this
     //EFFECTS: this is a constructor, construct users weight,height,age,gender according to user input
     //
@@ -51,6 +51,7 @@ public class PhysicalInfo {
         return this.caloriesNeeded;
     }
 
+    //REQUIRES: user has valid input
     // MODIFIES: this
     // EFFECT: calculate how many calories does the user need(for maintain weight) according to user's weight height and
     //         age, gender (different gender use different calculation formula)
@@ -62,7 +63,7 @@ public class PhysicalInfo {
         }
     }
 
-
+    //REQUIRES: user has valid input
     //MODIFIES: this
     //EFFECT: calculate how many calories does the user need (for lose weight) according to user's physical info input.
     //        different weekly lose weight goal should result in largely different calories needed.
