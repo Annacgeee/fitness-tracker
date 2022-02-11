@@ -24,5 +24,5 @@
 ## User Story:
 - As a user, I want to input my weight, height,gender, age into my physical info
 - As a user, I want to select weekly fitness goal 
-- As a user, I want to know what is my daily maximum calories intake
+- As a user, I want to know what is my daily maximum calories intake, and how many calories left
 - As a user, I want to add a Food item to Daily Consumption

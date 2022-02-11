@@ -1,9 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-// methods in this class
-// addFoodItem: able to add a food item to foodlist
-// removeFoodItem: able to delete a food item from foodlist
+
 
 public class DailyConsumption {
     private PhysicalInfo physicalInfo;
@@ -20,10 +18,13 @@ public class DailyConsumption {
 
     //MODIFIES: this
     //EFFECT: when a food is added, the food item list should be updated with the food, also the remaining calories
-    // should be reduced by the calories of the food, if the remaining calories is already zero,then it won't change
+    // should be reduced by the calories of the food, if the remaining calories is already zero,then it won't change.
+    // if there is not enough remaining calories to add food, the remaining calories will be zero after add the food.
     public void addFoodItem(FoodItem foodItem) {
         this.foodItems.add(foodItem);
-        if (remainingCalories == 0) {
+        if (remainingCalories <= 0) {
+            this.remainingCalories = 0;
+        } else if (foodItem.getCalories() > remainingCalories) {
             this.remainingCalories = 0;
         } else {
             this.remainingCalories = remainingCalories - foodItem.getCalories();
@@ -36,7 +37,7 @@ public class DailyConsumption {
     //           added back to the remaining calories
 
     public void removeFoodItem(){
-    //write this in second phase
+    //maybe write this in second phase
     }
 
     //EFFECTS:return the current remaining calories
