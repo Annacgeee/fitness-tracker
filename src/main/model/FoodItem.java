@@ -1,6 +1,9 @@
 package model;
 
-public class FoodItem {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class FoodItem implements Writable {
     private String foodName;
     private int calories;
 
@@ -19,5 +22,15 @@ public class FoodItem {
     public int getCalories() {
         return this.calories;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name",foodName);
+        json.put("calories",calories);
+        return json;
+    }
+
+
 
 }

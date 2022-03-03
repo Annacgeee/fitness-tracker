@@ -24,7 +24,7 @@ public class FitnessApp {
     private void runFitnessApp() {
         this.physicalInfo = initializePhysicalInfo();
         calculateCalories();
-        dailyConsumption = new DailyConsumption(physicalInfo.getCaloriesNeeded());
+        dailyConsumption = new DailyConsumption(dailyConsumption.getName());
         menu();
     }
 

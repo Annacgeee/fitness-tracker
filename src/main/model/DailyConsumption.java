@@ -1,18 +1,31 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.JsonReader;
+import persistence.Writable;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
-public class DailyConsumption {
+public class DailyConsumption implements Writable {
     private PhysicalInfo physicalInfo;
-    private ArrayList<FoodItem> foodItems;
+    private List<FoodItem> foodItems;
     private double remainingCalories;
+    private String name;
 
     //EFFECT:construct daily consumption contains the remaining calories for the day, and also the list of food that
     //       have been added
-    public  DailyConsumption(double remainingCalories) {
+    public  DailyConsumption(String name) {
         this.remainingCalories = remainingCalories;
         this.foodItems = new ArrayList<>();
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
 
@@ -31,6 +44,16 @@ public class DailyConsumption {
         }
     }
 
+    //EFFECTS: returns an unmodifiable list of fooditems in this daily consumption
+    public List<FoodItem> getFoodItem() {
+        return Collections.unmodifiableList(foodItems);
+    }
+
+    //EFFECTS: returns number of fooditems in this daily consumption
+    public int numFoodItems() {
+        return foodItems.size();
+    }
+
 
     //EFFECTS:return the current remaining calories
     public double getRemainingCalories() {
@@ -38,8 +61,28 @@ public class DailyConsumption {
     }
 
     //EFFECTS: return the current food item list
-    public ArrayList<FoodItem> getFoodItems() {
+    public List<FoodItem> getFoodItems() {
         return foodItems;
     }
 
+    @Override
+    //cite from demo
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name",name);
+        json.put("foodItems", foodItemsToJson());
+        return json;
+    }
+
+    //EFFECTS: returns fooditems in this daily consumption as a json array
+    private JSONArray foodItemsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (FoodItem f : foodItems) {
+            jsonArray.put(f.toJson());
+        }
+
+        return jsonArray;
+
+    }
 }

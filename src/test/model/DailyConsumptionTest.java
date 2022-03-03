@@ -19,9 +19,9 @@ public class DailyConsumptionTest {
 
     @BeforeEach
     public void setup() {
-        this.mondayConsumption = new DailyConsumption(500);
-        this.tuesdayConsumption = new DailyConsumption(20);
-        this.wednesdayConsumption = new DailyConsumption(0);
+        this.mondayConsumption = new DailyConsumption(500, "Anna");
+        this.tuesdayConsumption = new DailyConsumption(20,"Max");
+        this.wednesdayConsumption = new DailyConsumption(0,"Carol");
         oatmeal = new FoodItem("oatmeal", 30);
         chocolate = new FoodItem("chocolate", 120);
         foodItems = new ArrayList<>();
