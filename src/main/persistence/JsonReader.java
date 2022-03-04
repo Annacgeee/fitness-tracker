@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 // Represents a reader that reads daily consumption from JSON data stored in file
-//cite from demo
+//cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonReader {
     private String source;
     private PhysicalInfo physicalInfo;
@@ -26,6 +26,7 @@ public class JsonReader {
 
     // EFFECTS: reads daily consumption from file and returns it;
     // throws IOException if an error occurs reading data from file
+    // cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public DailyConsumption read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -34,6 +35,7 @@ public class JsonReader {
     }
 
     //EFFECTS:reads source file as string and returns it
+    //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -45,6 +47,7 @@ public class JsonReader {
     }
 
     //EFFECTS: parses daily consumption from JSON object and return it
+    //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
     private DailyConsumption parseDailyConsumption(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
@@ -56,6 +59,7 @@ public class JsonReader {
 
     // MODIFIES: daily consumption
     // EFFECTS: parses fooditems from JSON object and adds them to daily consumption
+    //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     private void addFoodItems(DailyConsumption dc, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("foodItems");
         for (Object json : jsonArray) {
@@ -66,6 +70,7 @@ public class JsonReader {
 
     //MODIFIES: dc
     // EFFECTS: parses fooditem from json object and add it to workroom
+    //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     private void addFoodItem(DailyConsumption dc, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int calories = jsonObject.getInt("calories");

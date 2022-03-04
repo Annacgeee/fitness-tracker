@@ -49,11 +49,13 @@ public class DailyConsumption implements Writable {
     }
 
     //EFFECTS: returns an unmodifiable list of fooditems in this daily consumption
+    //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public List<FoodItem> getFoodItem() {
         return Collections.unmodifiableList(foodItems);
     }
 
     //EFFECTS: returns number of fooditems in this daily consumption
+    //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public int numFoodItems() {
         return foodItems.size();
     }
@@ -67,6 +69,7 @@ public class DailyConsumption implements Writable {
 
     @Override
     //cite from demo
+    //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name",name);
@@ -75,6 +78,7 @@ public class DailyConsumption implements Writable {
     }
 
     //EFFECTS: returns food items in this daily consumption as a json array
+    //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     private JSONArray foodItemsToJson() {
         JSONArray jsonArray = new JSONArray();
 

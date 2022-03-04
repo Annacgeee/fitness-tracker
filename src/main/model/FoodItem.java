@@ -24,6 +24,7 @@ public class FoodItem implements Writable {
     }
 
     @Override
+    //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name",foodName);

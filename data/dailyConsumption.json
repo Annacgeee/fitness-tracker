@@ -1,0 +1,13 @@
+{
+    "name": "Anna's daily consumption",
+    "foodItems": [
+        {
+            "name": "EGG",
+            "calories": 100
+        },
+        {
+            "name": "choco",
+            "calories": 100
+        }
+    ]
+}

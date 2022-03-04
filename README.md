@@ -26,5 +26,5 @@
 - As a user, I want to select weekly fitness goal 
 - As a user, I want to know what is my daily maximum calories intake, and how many calories left
 - As a user, I want to add a Food item to Daily Consumption
-- As a user, I want to save my  food list to file
+- As a user, I want to save my food list to file
 - As a user, I want to be able to load my food list from file 
