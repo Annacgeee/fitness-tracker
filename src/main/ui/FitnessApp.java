@@ -4,7 +4,9 @@ import model.PhysicalInfo;
 import model.DailyConsumption;
 import model.FoodItem;
 import persistence.JsonReader;
+import persistence.JsonReaderPhysicalInfo;
 import persistence.JsonWriter;
+import persistence.JsonWriterPhysicalInfo;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,19 +16,25 @@ import java.util.Scanner;
 
 public class FitnessApp {
     private static final String JSON_STORE = "./data/dailyConsumption.json";
+    private static final String JSON_STORE2 = "./data/physicalInfo.json";
     private PhysicalInfo physicalInfo;
     private DailyConsumption dailyConsumption;
     private Scanner input;
     private JsonWriter jsonWriter;
+    private JsonWriterPhysicalInfo jsonWriter2;
+    private JsonReaderPhysicalInfo jsonReader2;
     private JsonReader jsonReader;
 
     //EFFECTS: construct a daily consumption and runs the application
     public FitnessApp() throws FileNotFoundException {
 
         input = new Scanner(System.in);
-        //dailyConsumption = new DailyConsumption("Anna's daily consumption", 200);
+
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter2 = new JsonWriterPhysicalInfo(JSON_STORE2);
+        jsonReader2 = new JsonReaderPhysicalInfo(JSON_STORE2);
+
         runFitnessApp();
 
     }
@@ -34,12 +42,42 @@ public class FitnessApp {
     //MODIFIES: this
     //Effects: send out command to guide user setup their physical info
     private void runFitnessApp() {
-        this.physicalInfo = initializePhysicalInfo();
-        calculateCalories();
-        dailyConsumption = new DailyConsumption("Anna's daily consumption", physicalInfo.getCaloriesNeeded());
         menu();
     }
 
+    private void menu() {
+        boolean keepGoing = true;
+        while (keepGoing) {
+            displayMenu();
+            String option = "";
+            option = input.nextLine();
+            if (option.equals("Q")) {
+                keepGoing = false;
+            } else if (option.equals("A")) {
+                this.physicalInfo = initializePhysicalInfo();
+                calculateCalories();
+                dailyConsumption = new DailyConsumption("Anna's daily consumption", physicalInfo.getCaloriesNeeded());
+            } else if (option.equals("B")) {
+                savePhysicalInfo();
+            } else if (option.equals("E")) {
+                loadPhysicalInfo();
+            } else if (option.equals("D")) {
+                printPhysicalInfo();
+            } else if (option.equals("C")) {
+                System.out.println("You have " + dailyConsumption.getRemainingCalories() + " remaining calories");
+            } else if (option.equals("F")) {
+                addFoodItem();
+            } else if (option.equals("P")) {
+                printFoodItems();
+            } else if (option.equals("S")) {
+                saveDailyConsumption();
+            } else if (option.equals("L")) {
+                loadDailyConsumption();
+            }  else {
+                System.out.println("Please enter valid option!");
+            }
+        }
+    }
 
     //REQUIRES: user has valid inputs
     //MODIFIES:PhysicalInfo
@@ -85,41 +123,20 @@ public class FitnessApp {
     }
 
 
-    private void menu() {
-        boolean keepGoing = true;
 
-        //input.nextLine();
-        while (keepGoing) {
-            displayMenu();
-            String option = "";
-
-            option = input.nextLine();
-            if (option.equals("Q")) {
-                keepGoing = false;
-            } else if (option.equals("C")) {
-                System.out.println("You have " + dailyConsumption.getRemainingCalories() + " remaining calories");
-            } else if (option.equals("F")) {
-                addFoodItem();
-            } else if (option.equals("P")) {
-                printFoodItems();
-            } else if (option.equals("S")) {
-                saveDailyConsumption();
-            } else if (option.equals("L")) {
-                loadDailyConsumption();
-            }  else {
-                System.out.println("Please enter valid option!");
-            }
-        }
-    }
 
     //EFFECTS:display menu for user to choose
     private void displayMenu() {
         System.out.println("\nWhat would you like to do?");
-        System.out.println("Show calories left (C)");
+        System.out.println("Log my personal physical information(A)");
+        System.out.println("Save my personal physical information (B)");
+        System.out.println("Load my personal physical information (E)");
+        System.out.println("Print my personal physical information (D)");
         System.out.println("Add a food item (F)");
         System.out.println("Print food item list (P)");
         System.out.println("Save food item list to file(S)");
         System.out.println("load food item list from file(L)");
+        System.out.println("Show calories left (C)");
         System.out.println("Quit (Q)");
 
     }
@@ -195,6 +212,36 @@ public class FitnessApp {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
+
+    //EFFECTS: save personal physical info
+    private void savePhysicalInfo() {
+        try {
+            jsonWriter2.open();
+            jsonWriter2.write(physicalInfo);
+            jsonWriter2.close();
+            System.out.println("Physical information saved " + " to " + JSON_STORE2);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE2);
+        }
+
+    }
+
+    //EFFECTS: load physical info
+    private void loadPhysicalInfo() {
+        try {
+            physicalInfo = jsonReader2.read();
+            System.out.println("Physical information Loaded " + " from " + JSON_STORE2);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE2);
+        }
+    }
+    // EFFECTS: prints all physical info to console
+    private void printPhysicalInfo() {
+        System.out.println(physicalInfo.toString());
+
+    }
+
+
 }
 
 

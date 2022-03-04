@@ -1,4 +1,7 @@
 {
-    "name": "My Daily consumption",
-    "foodItems": []
+    "gender": true,
+    "weight": 100,
+    "caloriesNeeded": 0,
+    "age": 22,
+    "height": 170
 }

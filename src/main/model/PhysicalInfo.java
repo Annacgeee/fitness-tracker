@@ -1,14 +1,18 @@
 package model;
 
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 
-public class PhysicalInfo {
+public class PhysicalInfo implements Writable {
     private boolean gender;
     private int age;
     private double weight;
     private int height;
+
     private double caloriesNeeded;
     private static int caloriesNeededToLoseOneKG = 7700;// to lose 1kg, people must have 7700 calories deficit
     private ArrayList<Double> kgToLosePerWeek; // create a list to store week lose weight goal in kg
@@ -47,6 +51,31 @@ public class PhysicalInfo {
         return this.gender;
     }
 
+    public double getCaloriesNeeded() {
+        return this.caloriesNeeded;
+    }
+
+    //EFFECTS:return string representation of physical info
+    public String toString() {
+        return "Your physical information is "
+                + " : " +  "; weight is "
+                + weight + "; height is "
+                + height + "; age is "
+                + age + "; gender is "
+                + gender + "; your need "
+                + caloriesNeeded + " calories";
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("weight", weight);
+        json.put("height", height);
+        json.put("age", age);
+        json.put("gender", gender);
+        json.put("caloriesNeeded", caloriesNeeded);
+        return json;
+    }
 
     //REQUIRES: user has valid input
     // MODIFIES: this
@@ -55,10 +84,11 @@ public class PhysicalInfo {
     public double calculateCaloriesNeededForMaintainWeight() {
         if (this.getGender() == true) {
             return this.caloriesNeeded = 10 * this.weight + 6.25 * this.height - 5 * this.age - 161;
-        } else {
-            return this.caloriesNeeded = 10 * this.weight + 6.25 * this.height - 5 * this.age + 5;
         }
+        return this.caloriesNeeded = 10 * this.weight + 6.25 * this.height - 5 * this.age + 5;
     }
+
+
 
     //REQUIRES: user has valid input
     //MODIFIES: this
@@ -76,7 +106,5 @@ public class PhysicalInfo {
     }
 
 
-    public double getCaloriesNeeded() {
-        return this.caloriesNeeded;
-    }
+
 }
