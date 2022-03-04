@@ -62,4 +62,26 @@ public class DailyConsumptionTest {
         assertEquals(2, mondayConsumption.getFoodItem().size());
         assertEquals(foodItems, mondayConsumption.getFoodItem());
     }
+
+    @Test
+    public void testNumFoodItemZero() {
+        assertEquals(0,foodItems.size());
+    }
+
+    @Test
+    public void testGeneralFoodItemZero(){
+        foodItems.add(oatmeal);
+        foodItems.add(chocolate);
+        assertEquals(2,foodItems.size());
+
+    }
+
+    @Test
+    public void testGetFoodItem(){
+        foodItems.add(oatmeal);
+        foodItems.add(chocolate);
+        assertEquals(2,foodItems.size());
+        assertEquals(oatmeal,foodItems.get(0));
+        assertEquals(chocolate,foodItems.get(1));
+    }
 }

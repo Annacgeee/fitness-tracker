@@ -155,7 +155,7 @@ public class FitnessApp {
         System.out.println("4) Add a food item");
         System.out.println("5) Print food item list");
         System.out.println("6) Save my profile");
-        System.out.println("7) Quit");
+        System.out.println("0) Quit");
 
     }
 
@@ -257,7 +257,7 @@ public class FitnessApp {
             System.out.println("Unable to read from file: " + JSON_STORE2);
         }
     }
-    
+
     // EFFECTS: prints all physical info to console
     private void printPhysicalInfo() {
         if (physicalInfo == null) {

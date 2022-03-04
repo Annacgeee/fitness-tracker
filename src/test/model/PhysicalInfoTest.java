@@ -70,6 +70,16 @@ public class PhysicalInfoTest {
         assertEquals(655, personB.calculateCaloriesToLoseWeight(4));
     }
 
+    @Test
+    void testToString() {
+        assertEquals("Your physical information is  :" +
+        "\n weight is 53.0" +
+        "\n height is 160" +
+        "\n age is 25" +
+        "\n gender is female" +
+        "\n you need 0.0 calories", personA.toString());
+    }
+
 
 }
 

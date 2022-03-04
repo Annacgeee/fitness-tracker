@@ -18,4 +18,9 @@ class FoodItemTest {
         assertEquals("oatmeal", testFoodItem.getFoodName());
         assertEquals(30, testFoodItem.getCalories());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("oatmeal : 30",testFoodItem.toString());
+    }
 }

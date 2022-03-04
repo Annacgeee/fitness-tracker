@@ -73,7 +73,7 @@ public class PhysicalInfo implements Writable {
     public String toString() {
         String genderStr = gender ? "female" : "male";
         return "Your physical information is "
-                + " : " +  "\n weight is "
+                + " :" +  "\n weight is "
                 + weight + "\n height is "
                 + height + "\n age is "
                 + age + "\n gender is "
