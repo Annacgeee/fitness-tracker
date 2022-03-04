@@ -24,12 +24,17 @@ public class FoodItem implements Writable {
     }
 
     @Override
+    // Effects: create a JSON object
     //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name",foodName);
         json.put("calories",calories);
         return json;
+    }
+
+    public String toString() {
+        return foodName + " : " + calories;
     }
 
 

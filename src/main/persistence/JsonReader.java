@@ -31,7 +31,6 @@ public class JsonReader {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseDailyConsumption(jsonObject);
-
     }
 
     //EFFECTS:reads source file as string and returns it
@@ -51,10 +50,10 @@ public class JsonReader {
 
     private DailyConsumption parseDailyConsumption(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        DailyConsumption dc = new DailyConsumption(name, 500);
+        double calories = jsonObject.getDouble("calories");
+        DailyConsumption dc = new DailyConsumption(name,calories);
         addFoodItems(dc,jsonObject);
         return dc;
-
     }
 
     // MODIFIES: daily consumption

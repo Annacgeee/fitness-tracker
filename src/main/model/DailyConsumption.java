@@ -68,7 +68,7 @@ public class DailyConsumption implements Writable {
 
 
     @Override
-    //cite from demo
+    //EFFECTS: create json object of daily consumption
     //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

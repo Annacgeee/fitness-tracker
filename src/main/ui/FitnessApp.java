@@ -22,11 +22,13 @@ public class FitnessApp {
 
     //EFFECTS: construct a daily consumption and runs the application
     public FitnessApp() throws FileNotFoundException {
+
         input = new Scanner(System.in);
-        dailyConsumption = new DailyConsumption("Anna's daily consumption", 200);
+        //dailyConsumption = new DailyConsumption("Anna's daily consumption", 200);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runFitnessApp();
+
     }
 
     //MODIFIES: this
@@ -34,7 +36,7 @@ public class FitnessApp {
     private void runFitnessApp() {
         this.physicalInfo = initializePhysicalInfo();
         calculateCalories();
-        dailyConsumption = new DailyConsumption(dailyConsumption.getName(),dailyConsumption.getRemainingCalories());
+        dailyConsumption = new DailyConsumption("Anna's daily consumption", physicalInfo.getCaloriesNeeded());
         menu();
     }
 
@@ -78,23 +80,23 @@ public class FitnessApp {
         } else {
             physicalInfo.calculateCaloriesNeededForMaintainWeight();
             System.out.println("Your daily maximum calories is " + physicalInfo.getCaloriesNeeded());
+
         }
     }
 
 
     private void menu() {
-        input.nextLine();
-        while (true) {
+        boolean keepGoing = true;
+
+        //input.nextLine();
+        while (keepGoing) {
+            displayMenu();
             String option = "";
-            System.out.println("\nWhat would you like to do?");
-            System.out.println("Show calories left (C)");
-            System.out.println("Add a food item (F)");
-            System.out.println("Print food item list (P)");
-            System.out.println("Save food item list to file(S)");
-            System.out.println("load food item list from file(L)");
-            System.out.println("Quit (Q)");
+
             option = input.nextLine();
-            if (option.equals("C")) {
+            if (option.equals("Q")) {
+                keepGoing = false;
+            } else if (option.equals("C")) {
                 System.out.println("You have " + dailyConsumption.getRemainingCalories() + " remaining calories");
             } else if (option.equals("F")) {
                 addFoodItem();
@@ -104,12 +106,22 @@ public class FitnessApp {
                 saveDailyConsumption();
             } else if (option.equals("L")) {
                 loadDailyConsumption();
-            } else if (option.equals("Q")) {
-                break;
-            } else {
+            }  else {
                 System.out.println("Please enter valid option!");
             }
         }
+    }
+
+    //EFFECTS:display menu for user to choose
+    private void displayMenu() {
+        System.out.println("\nWhat would you like to do?");
+        System.out.println("Show calories left (C)");
+        System.out.println("Add a food item (F)");
+        System.out.println("Print food item list (P)");
+        System.out.println("Save food item list to file(S)");
+        System.out.println("load food item list from file(L)");
+        System.out.println("Quit (Q)");
+
     }
 
     //EFFECTS: display goal option for user to choose
@@ -157,7 +169,7 @@ public class FitnessApp {
         List<FoodItem> foodItemList = dailyConsumption.getFoodItem();
 
         for (FoodItem f : foodItemList) {
-            System.out.println(f);
+            System.out.println(f.toString());
         }
     }
 

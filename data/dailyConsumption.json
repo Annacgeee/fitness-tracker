@@ -1,13 +1,7 @@
 {
     "name": "Anna's daily consumption",
-    "foodItems": [
-        {
-            "name": "EGG",
-            "calories": 100
-        },
-        {
-            "name": "choco",
-            "calories": 100
-        }
-    ]
+    "foodItems": [{
+        "name": "egg",
+        "calories": 100
+    }]
 }

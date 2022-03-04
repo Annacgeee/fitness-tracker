@@ -28,7 +28,7 @@ public class JsonWriterTest extends JsonTest {
     @Test
     void testWriterEmptyDailyConsumption() {
         try {
-            DailyConsumption dc = new DailyConsumption("Anna's Daily consumption",500);
+            DailyConsumption dc = new DailyConsumption("My Daily consumption",500);
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom.json");
             writer.open();
             writer.write(dc);
@@ -36,7 +36,7 @@ public class JsonWriterTest extends JsonTest {
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
             dc = reader.read();
-            assertEquals("Anna's Daily consumption", dc.getName());
+            assertEquals("My Daily consumption", dc.getName());
             assertEquals(0, dc.numFoodItems());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
@@ -46,7 +46,7 @@ public class JsonWriterTest extends JsonTest {
     @Test
     void testWriterGeneralDailyConsumption() {
         try {
-            DailyConsumption dc = new DailyConsumption("Anna's Daily consumption",500);
+            DailyConsumption dc = new DailyConsumption("My Daily consumption",500);
             dc.addFoodItem(new FoodItem("egg",100));
             dc.addFoodItem(new FoodItem("oats", 100));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
@@ -56,7 +56,7 @@ public class JsonWriterTest extends JsonTest {
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
             dc = reader.read();
-            assertEquals("Anna's Daily consumption", dc.getName());
+            assertEquals("My Daily consumption", dc.getName());
             List<FoodItem> foodItem = dc.getFoodItem();
             assertEquals(2, foodItem.size());
             checkFoodItem("egg", 100, foodItem.get(0) );
