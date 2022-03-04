@@ -11,7 +11,6 @@ import java.util.List;
 
 
 public class DailyConsumption implements Writable {
-    private PhysicalInfo physicalInfo;
     private List<FoodItem> foodItems;
     private double remainingCalories;
     private String name;
@@ -74,6 +73,7 @@ public class DailyConsumption implements Writable {
         JSONObject json = new JSONObject();
         json.put("name",name);
         json.put("foodItems", foodItemsToJson());
+        json.put("remainingCalories", remainingCalories);
         return json;
     }
 

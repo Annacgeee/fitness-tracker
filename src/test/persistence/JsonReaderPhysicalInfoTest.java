@@ -24,10 +24,15 @@ public class JsonReaderPhysicalInfoTest  {
 
     @Test
     void testReaderPhysicalInfo() {
-        JsonReaderPhysicalInfo reader = new JsonReaderPhysicalInfo("./data/testReaderGeneralWorkRoom.json");
         try {
-            PhysicalInfo pi = reader.read();
-            assertEquals(100, pi.getWeight());
+            PhysicalInfo pi = new PhysicalInfo(100,170,22,true);
+            JsonWriterPhysicalInfo writer = new JsonWriterPhysicalInfo("./data/testReaderGeneralPhysicalInfo.json");
+            writer.open();
+            writer.write(pi);
+            writer.close();
+
+            JsonReaderPhysicalInfo reader = new JsonReaderPhysicalInfo("./data/testReaderGeneralPhysicalInfo.json");
+            pi = reader.read();
             assertEquals(100, pi.getWeight());
             assertEquals(170, pi.getHeight());
             assertEquals(22,pi.getAge());

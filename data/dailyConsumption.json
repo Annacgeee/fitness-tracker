@@ -1,13 +1,5 @@
 {
     "name": "Anna's daily consumption",
-    "foodItems": [
-        {
-            "name": "eff",
-            "calories": 100
-        },
-        {
-            "name": "efer",
-            "calories": 100
-        }
-    ]
+    "remainingCalories": 2506.25,
+    "foodItems": []
 }

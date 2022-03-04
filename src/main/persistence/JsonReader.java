@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Stream;
 
 // Represents a reader that reads daily consumption from JSON data stored in file
@@ -50,8 +51,8 @@ public class JsonReader {
 
     private DailyConsumption parseDailyConsumption(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        double calories = jsonObject.getDouble("calories");
-        DailyConsumption dc = new DailyConsumption(name,calories);
+        double calories = jsonObject.getDouble("remainingCalories");
+        DailyConsumption dc = new DailyConsumption(name, calories);
         addFoodItems(dc,jsonObject);
         return dc;
     }

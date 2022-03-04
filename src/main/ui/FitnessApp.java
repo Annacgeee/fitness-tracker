@@ -45,38 +45,59 @@ public class FitnessApp {
         menu();
     }
 
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void menu() {
-        boolean keepGoing = true;
-        while (keepGoing) {
-            displayMenu();
-            String option = "";
-            option = input.nextLine();
-            if (option.equals("Q")) {
-                keepGoing = false;
-            } else if (option.equals("A")) {
-                this.physicalInfo = initializePhysicalInfo();
-                calculateCalories();
-                dailyConsumption = new DailyConsumption("Anna's daily consumption", physicalInfo.getCaloriesNeeded());
-            } else if (option.equals("B")) {
-                savePhysicalInfo();
-            } else if (option.equals("E")) {
+
+        String load = "";
+        while (!load.equals("Y") && !load.equals("N")) {
+            System.out.println("Would you like to load your profile? (Y/N)");
+            load = input.nextLine();
+            if (load.equals("Y")) {
                 loadPhysicalInfo();
-            } else if (option.equals("D")) {
-                printPhysicalInfo();
-            } else if (option.equals("C")) {
-                System.out.println("You have " + dailyConsumption.getRemainingCalories() + " remaining calories");
-            } else if (option.equals("F")) {
-                addFoodItem();
-            } else if (option.equals("P")) {
-                printFoodItems();
-            } else if (option.equals("S")) {
-                saveDailyConsumption();
-            } else if (option.equals("L")) {
                 loadDailyConsumption();
-            }  else {
-                System.out.println("Please enter valid option!");
             }
         }
+
+        while (true) {
+            displayMenu();
+            int option = input.nextInt();
+            switch (option) {
+                case 1:
+                    this.physicalInfo = initializePhysicalInfo();
+                    calculateCalories();
+                    dailyConsumption = new DailyConsumption(
+                            "Anna's daily consumption",
+                            physicalInfo.getCaloriesNeeded()
+                    );
+                    break;
+                case 2:
+                    printPhysicalInfo();
+                    break;
+                case 3:
+                    System.out.println("You have " + dailyConsumption.getRemainingCalories() + " remaining calories");
+                    break;
+                case 4:
+                    addFoodItem();
+                    break;
+                case 5:
+                    printFoodItems();
+                    break;
+                case 6:
+                    if (physicalInfo == null || dailyConsumption == null) {
+                        System.out.println("Please initialize profile first!");
+                        break;
+                    }
+                    savePhysicalInfo();
+                    saveDailyConsumption();
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Please select a valid option!\n");
+                    break;
+            }
+        }
+
     }
 
     //REQUIRES: user has valid inputs
@@ -127,17 +148,14 @@ public class FitnessApp {
 
     //EFFECTS:display menu for user to choose
     private void displayMenu() {
-        System.out.println("\nWhat would you like to do?");
-        System.out.println("Log my personal physical information(A)");
-        System.out.println("Save my personal physical information (B)");
-        System.out.println("Load my personal physical information (E)");
-        System.out.println("Print my personal physical information (D)");
-        System.out.println("Add a food item (F)");
-        System.out.println("Print food item list (P)");
-        System.out.println("Save food item list to file(S)");
-        System.out.println("load food item list from file(L)");
-        System.out.println("Show calories left (C)");
-        System.out.println("Quit (Q)");
+        System.out.println("\nSelect by pressing number of option:");
+        System.out.println("1) Log my personal physical information");
+        System.out.println("2) Print my personal physical information");
+        System.out.println("3) Show calories left");
+        System.out.println("4) Add a food item");
+        System.out.println("5) Print food item list");
+        System.out.println("6) Save my profile");
+        System.out.println("7) Quit");
 
     }
 
@@ -174,6 +192,7 @@ public class FitnessApp {
     //MODIFIES: THIS
     //EFFECTS: add a food item to daily consumption
     private void addFoodItem() {
+        input.nextLine();
         System.out.println("What food would you like to add?");
         String foodName = input.nextLine();
         dailyConsumption.addFoodItem(new FoodItem(foodName, 100));//set all food calories default is 100
@@ -183,8 +202,11 @@ public class FitnessApp {
     //MODIFIES: this
     // EFFECTS: prints all the food items in daily consumption to console
     private void printFoodItems() {
+        if (dailyConsumption == null) {
+            System.out.println("No food items available");
+            return;
+        }
         List<FoodItem> foodItemList = dailyConsumption.getFoodItem();
-
         for (FoodItem f : foodItemList) {
             System.out.println(f.toString());
         }
@@ -235,10 +257,14 @@ public class FitnessApp {
             System.out.println("Unable to read from file: " + JSON_STORE2);
         }
     }
+    
     // EFFECTS: prints all physical info to console
     private void printPhysicalInfo() {
-        System.out.println(physicalInfo.toString());
-
+        if (physicalInfo == null) {
+            System.out.println("No physical info available");
+        } else {
+            System.out.println(physicalInfo.toString());
+        }
     }
 
 

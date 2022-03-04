@@ -35,6 +35,20 @@ public class PhysicalInfo implements Writable {
         kgToLosePerWeek.add(1.0);
     }
 
+    public PhysicalInfo(double w, int h, int age, boolean gender, double caloriesNeeded) {
+        this.weight = w;
+        this.height = h;
+        this.age = age;
+        this.gender = gender;
+        this.caloriesNeeded = caloriesNeeded;
+        kgToLosePerWeek = new ArrayList<>();
+        kgToLosePerWeek.add(0.2);
+        kgToLosePerWeek.add(0.5);
+        kgToLosePerWeek.add(0.8);
+        kgToLosePerWeek.add(1.0);
+    }
+
+
     public int getHeight() {
         return this.height;
     }
@@ -57,12 +71,13 @@ public class PhysicalInfo implements Writable {
 
     //EFFECTS:return string representation of physical info
     public String toString() {
+        String genderStr = gender ? "female" : "male";
         return "Your physical information is "
-                + " : " +  "; weight is "
-                + weight + "; height is "
-                + height + "; age is "
-                + age + "; gender is "
-                + gender + "; your need "
+                + " : " +  "\n weight is "
+                + weight + "\n height is "
+                + height + "\n age is "
+                + age + "\n gender is "
+                + genderStr + "\n you need "
                 + caloriesNeeded + " calories";
     }
 

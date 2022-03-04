@@ -44,8 +44,9 @@ public class JsonReaderPhysicalInfo {
         int height = jsonObject.getInt("height");
         int age = jsonObject.getInt("age");
         Boolean gender = jsonObject.getBoolean("gender");
+        double caloriesNeeded = jsonObject.getDouble("caloriesNeeded");
 
-        PhysicalInfo pi = new PhysicalInfo(weight,height,age,gender);
+        PhysicalInfo pi = new PhysicalInfo(weight,height,age,gender, caloriesNeeded);
 
         return pi;
     }
