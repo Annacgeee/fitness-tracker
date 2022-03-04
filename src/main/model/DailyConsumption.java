@@ -9,18 +9,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+// daily consumption class to keep list of foods added and remaining calories for user, and consumption name
 public class DailyConsumption implements Writable {
     private List<FoodItem> foodItems;
     private double remainingCalories;
     private String name;
 
     //EFFECT:construct daily consumption contains the remaining calories for the day, and also the list of food that
-    //       have been added
+    //       have been added, name of the consumption
 
-
-    ///////////
-    //daily consumption being modied, remaining calroies removed from param
     public  DailyConsumption(String name, double remainingCalories) {
         this.remainingCalories = remainingCalories;
         this.foodItems = new ArrayList<>();

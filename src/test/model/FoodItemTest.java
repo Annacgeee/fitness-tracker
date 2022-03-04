@@ -23,4 +23,5 @@ class FoodItemTest {
     void toStringTest() {
         assertEquals("oatmeal : 30",testFoodItem.toString());
     }
+
 }

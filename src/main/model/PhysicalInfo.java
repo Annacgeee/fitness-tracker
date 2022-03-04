@@ -6,7 +6,7 @@ import persistence.Writable;
 
 import java.util.ArrayList;
 
-
+// physical info class that keeps users physical info and calculate calories needed
 public class PhysicalInfo implements Writable {
     private boolean gender;
     private int age;
@@ -34,7 +34,8 @@ public class PhysicalInfo implements Writable {
         kgToLosePerWeek.add(0.8);
         kgToLosePerWeek.add(1.0);
     }
-
+    
+     //construct another constrctor for json to use
     public PhysicalInfo(double w, int h, int age, boolean gender, double caloriesNeeded) {
         this.weight = w;
         this.height = h;
@@ -82,6 +83,7 @@ public class PhysicalInfo implements Writable {
     }
 
     @Override
+    // EFFECTS: turn it to Jsonobject
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("weight", weight);

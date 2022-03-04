@@ -33,6 +33,7 @@ public class FoodItem implements Writable {
         return json;
     }
 
+    //EFFECT: return to string
     public String toString() {
         return foodName + " : " + calories;
     }
