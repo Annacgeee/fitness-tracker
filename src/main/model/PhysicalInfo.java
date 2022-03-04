@@ -34,8 +34,8 @@ public class PhysicalInfo implements Writable {
         kgToLosePerWeek.add(0.8);
         kgToLosePerWeek.add(1.0);
     }
-    
-     //construct another constrctor for json to use
+
+     //construct another constructor for json to use
     public PhysicalInfo(double w, int h, int age, boolean gender, double caloriesNeeded) {
         this.weight = w;
         this.height = h;
