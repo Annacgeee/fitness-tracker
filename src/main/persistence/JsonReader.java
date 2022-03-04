@@ -3,6 +3,7 @@ package persistence;
 
 import model.DailyConsumption;
 import model.FoodItem;
+import model.PhysicalInfo;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
 //cite from demo
 public class JsonReader {
     private String source;
+    private PhysicalInfo physicalInfo;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -32,21 +34,21 @@ public class JsonReader {
     }
 
     //EFFECTS:reads source file as string and returns it
-    private String readFile(String string) throws IOException {
+    private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         }
+
         return contentBuilder.toString();
     }
-
 
     //EFFECTS: parses daily consumption from JSON object and return it
 
     private DailyConsumption parseDailyConsumption(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        DailyConsumption dc = new DailyConsumption(name);
+        DailyConsumption dc = new DailyConsumption(name, 500);
         addFoodItems(dc,jsonObject);
         return dc;
 

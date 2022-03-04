@@ -18,7 +18,11 @@ public class DailyConsumption implements Writable {
 
     //EFFECT:construct daily consumption contains the remaining calories for the day, and also the list of food that
     //       have been added
-    public  DailyConsumption(String name) {
+
+
+    ///////////
+    //daily consumption being modied, remaining calroies removed from param
+    public  DailyConsumption(String name, double remainingCalories) {
         this.remainingCalories = remainingCalories;
         this.foodItems = new ArrayList<>();
         this.name = name;
@@ -60,10 +64,6 @@ public class DailyConsumption implements Writable {
         return this.remainingCalories;
     }
 
-    //EFFECTS: return the current food item list
-    public List<FoodItem> getFoodItems() {
-        return foodItems;
-    }
 
     @Override
     //cite from demo
@@ -74,12 +74,12 @@ public class DailyConsumption implements Writable {
         return json;
     }
 
-    //EFFECTS: returns fooditems in this daily consumption as a json array
+    //EFFECTS: returns food items in this daily consumption as a json array
     private JSONArray foodItemsToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (FoodItem f : foodItems) {
-            jsonArray.put(f.toJson());
+        for (FoodItem t : foodItems) {
+            jsonArray.put(t.toJson());
         }
 
         return jsonArray;

@@ -47,9 +47,6 @@ public class PhysicalInfo {
         return this.gender;
     }
 
-    public double getCaloriesNeeded() {
-        return this.caloriesNeeded;
-    }
 
     //REQUIRES: user has valid input
     // MODIFIES: this
@@ -76,5 +73,10 @@ public class PhysicalInfo {
             return this.caloriesNeeded = (10 * this.weight + 6.25 * this.height - 5 * this.age + 5)
                     - ((caloriesNeededToLoseOneKG * kgToLosePerWeek.get(mySelect - 1)) / 7);
         }
+    }
+
+
+    public double getCaloriesNeeded() {
+        return this.caloriesNeeded;
     }
 }

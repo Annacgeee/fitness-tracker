@@ -19,9 +19,9 @@ public class DailyConsumptionTest {
 
     @BeforeEach
     public void setup() {
-        this.mondayConsumption = new DailyConsumption(500, "Anna");
-        this.tuesdayConsumption = new DailyConsumption(20,"Max");
-        this.wednesdayConsumption = new DailyConsumption(0,"Carol");
+        this.mondayConsumption = new DailyConsumption( "Anna",500);
+        this.tuesdayConsumption = new DailyConsumption("Max",20);
+        this.wednesdayConsumption = new DailyConsumption("Carol", 10);
         oatmeal = new FoodItem("oatmeal", 30);
         chocolate = new FoodItem("chocolate", 120);
         foodItems = new ArrayList<>();
@@ -36,11 +36,11 @@ public class DailyConsumptionTest {
 
     @Test
     public void testAddFoodItemForRemainingIsZero() {
-        assertTrue(wednesdayConsumption.getFoodItems().isEmpty());
+        assertTrue(wednesdayConsumption.getFoodItem().isEmpty());
         wednesdayConsumption.addFoodItem(chocolate);
         assertEquals(0, wednesdayConsumption.getRemainingCalories());
         foodItems.add(chocolate);
-        assertEquals(foodItems, wednesdayConsumption.getFoodItems());
+        assertEquals(foodItems, wednesdayConsumption.getFoodItem());
 
         tuesdayConsumption.addFoodItem(chocolate);
         assertEquals(0, tuesdayConsumption.getRemainingCalories());
@@ -49,17 +49,17 @@ public class DailyConsumptionTest {
     @Test
     public void testAddFoodItemForRemainingIsNotZero() {
 
-        assertTrue(mondayConsumption.getFoodItems().isEmpty());
+        assertTrue(mondayConsumption.getFoodItem().isEmpty());
         mondayConsumption.addFoodItem(oatmeal);
         foodItems.add(oatmeal);
         assertEquals(470, mondayConsumption.getRemainingCalories());
 
-        assertEquals(foodItems, mondayConsumption.getFoodItems());
+        assertEquals(foodItems, mondayConsumption.getFoodItem());
 
         mondayConsumption.addFoodItem(chocolate);
         foodItems.add(chocolate);
         assertEquals(350, mondayConsumption.getRemainingCalories());
-        assertEquals(2, mondayConsumption.getFoodItems().size());
-        assertEquals(foodItems, mondayConsumption.getFoodItems());
+        assertEquals(2, mondayConsumption.getFoodItem().size());
+        assertEquals(foodItems, mondayConsumption.getFoodItem());
     }
 }

@@ -3,28 +3,38 @@ package ui;
 import model.PhysicalInfo;
 import model.DailyConsumption;
 import model.FoodItem;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 
 public class FitnessApp {
+    private static final String JSON_STORE = "./data/dailyConsumption.json";
     private PhysicalInfo physicalInfo;
     private DailyConsumption dailyConsumption;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
-    //EFFECTS: runs the application
-    public FitnessApp() {
-
+    //EFFECTS: construct a daily consumption and runs the application
+    public FitnessApp() throws FileNotFoundException {
         input = new Scanner(System.in);
+        dailyConsumption = new DailyConsumption("Anna's daily consumption", 200);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runFitnessApp();
     }
 
-    //MODIFIES: PhysicalInfo,DailyConsumption
+    //MODIFIES: this
     //Effects: send out command to guide user setup their physical info
     private void runFitnessApp() {
         this.physicalInfo = initializePhysicalInfo();
         calculateCalories();
-        dailyConsumption = new DailyConsumption(dailyConsumption.getName());
+        dailyConsumption = new DailyConsumption(dailyConsumption.getName(),dailyConsumption.getRemainingCalories());
         menu();
     }
 
@@ -79,15 +89,21 @@ public class FitnessApp {
             System.out.println("\nWhat would you like to do?");
             System.out.println("Show calories left (C)");
             System.out.println("Add a food item (F)");
+            System.out.println("Print food item list (P)");
+            System.out.println("Save food item list to file(S)");
+            System.out.println("load food item list from file(L)");
             System.out.println("Quit (Q)");
             option = input.nextLine();
             if (option.equals("C")) {
                 System.out.println("You have " + dailyConsumption.getRemainingCalories() + " remaining calories");
             } else if (option.equals("F")) {
-                System.out.println("What food would you like to add?");
-                String foodName = input.nextLine();
-                dailyConsumption.addFoodItem(new FoodItem(foodName, 100));//set all food calories default is 100
-                //                                                            for now, I will change it in later phase
+                addFoodItem();
+            } else if (option.equals("P")) {
+                printFoodItems();
+            } else if (option.equals("S")) {
+                saveDailyConsumption();
+            } else if (option.equals("L")) {
+                loadDailyConsumption();
             } else if (option.equals("Q")) {
                 break;
             } else {
@@ -124,6 +140,48 @@ public class FitnessApp {
     public void processWeeklyGoalInput(int mySelect) {
         physicalInfo.calculateCaloriesToLoseWeight(mySelect);
         System.out.println("Your daily maximum calories is " + physicalInfo.getCaloriesNeeded());
+    }
+
+    //MODIFIES: THIS
+    //EFFECTS: add a food item to daily consumption
+    private void addFoodItem() {
+        System.out.println("What food would you like to add?");
+        String foodName = input.nextLine();
+        dailyConsumption.addFoodItem(new FoodItem(foodName, 100));//set all food calories default is 100
+        //
+    }
+
+    //MODIFIES: this
+    // EFFECTS: prints all the food items in daily consumption to console
+    private void printFoodItems() {
+        List<FoodItem> foodItemList = dailyConsumption.getFoodItem();
+
+        for (FoodItem f : foodItemList) {
+            System.out.println(f);
+        }
+    }
+
+    //EFFECTS: save the food list to file
+    public void saveDailyConsumption() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(dailyConsumption);
+            jsonWriter.close();
+            System.out.println("Saved " + dailyConsumption.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: loads daily consumption from file
+    private void loadDailyConsumption() {
+        try {
+            dailyConsumption = jsonReader.read();
+            System.out.println("Loaded " + dailyConsumption.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
 
