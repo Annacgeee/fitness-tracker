@@ -1,6 +1,6 @@
 {
     "name": "Anna's daily consumption",
-    "remainingCalories": 1245,
+    "remainingCalories": 945,
     "foodItems": [
         {
             "name": "egg",
@@ -8,6 +8,10 @@
         },
         {
             "name": "chocolate",
+            "calories": 100
+        },
+        {
+            "name": "berries",
             "calories": 100
         }
     ]

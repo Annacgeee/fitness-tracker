@@ -45,9 +45,8 @@ public class FitnessApp {
         menu();
     }
 
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    private void menu() {
 
+    private void menu() {
         String load = "";
         while (!load.equals("Y") && !load.equals("N")) {
             System.out.println("Would you like to load your profile? (Y/N)");
@@ -57,47 +56,19 @@ public class FitnessApp {
                 loadDailyConsumption();
             }
         }
-
-        while (true) {
+        int option = -1;
+        while (option != 0) {
             displayMenu();
-            int option = input.nextInt();
-            switch (option) {
-                case 1:
-                    this.physicalInfo = initializePhysicalInfo();
-                    calculateCalories();
-                    dailyConsumption = new DailyConsumption(
-                            "Anna's daily consumption",
-                            physicalInfo.getCaloriesNeeded()
-                    );
-                    break;
-                case 2:
-                    printPhysicalInfo();
-                    break;
-                case 3:
-                    System.out.println("You have " + dailyConsumption.getRemainingCalories() + " remaining calories");
-                    break;
-                case 4:
-                    addFoodItem();
-                    break;
-                case 5:
-                    printFoodItems();
-                    break;
-                case 6:
-                    if (physicalInfo == null || dailyConsumption == null) {
-                        System.out.println("Please initialize profile first!");
-                        break;
-                    }
-                    savePhysicalInfo();
-                    saveDailyConsumption();
-                    break;
-                case 0:
-                    return;
-                default:
-                    System.out.println("Please select a valid option!\n");
-                    break;
+            option = input.nextInt();
+            // split menu code for no actual reason because function line limit I guess
+            if (0 <= option && option <= 3) {
+                parseMenuOptionPart1(option);
+            } else if (4 <= option && option <= 6) {
+                parseMenuOptionPart2(option);
+            } else {
+                System.out.println("Please select a valid option!\n");
             }
         }
-
     }
 
     //REQUIRES: user has valid inputs
@@ -267,6 +238,55 @@ public class FitnessApp {
         }
     }
 
+
+    // EFFECTS: parse menu option 0~3
+    private void parseMenuOptionPart1(int option) {
+        switch (option) {
+            case 1:
+                this.physicalInfo = initializePhysicalInfo();
+                calculateCalories();
+                dailyConsumption = new DailyConsumption(
+                        "Anna's daily consumption",
+                        physicalInfo.getCaloriesNeeded()
+                );
+                break;
+            case 2:
+                printPhysicalInfo();
+                break;
+            case 3:
+                if (dailyConsumption == null) {
+                    System.out.println("Please initialize profile first!");
+                } else {
+                    System.out.println("You have " + dailyConsumption.getRemainingCalories() + " remaining calories");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    // EFFECTS: parse menu option 4~6
+    private void parseMenuOptionPart2(int option) {
+        switch (option) {
+            case 4:
+                addFoodItem();
+                break;
+            case 5:
+                printFoodItems();
+                break;
+            case 6:
+                if (physicalInfo == null || dailyConsumption == null) {
+                    System.out.println("Please initialize profile first!");
+                    break;
+                }
+                savePhysicalInfo();
+                saveDailyConsumption();
+                break;
+            default:
+                break;
+        }
+    }
 
 }
 
