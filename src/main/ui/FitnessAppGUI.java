@@ -7,14 +7,27 @@ import persistence.JsonReader;
 import persistence.JsonReaderPhysicalInfo;
 import persistence.JsonWriter;
 import persistence.JsonWriterPhysicalInfo;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 
-public class FitnessApp {
+public class FitnessAppGUI extends JPanel
+                           implements ListSelectionListener {
     private static final String JSON_STORE = "./data/dailyConsumption.json";
     private static final String JSON_STORE2 = "./data/physicalInfo.json";
     private PhysicalInfo physicalInfo;
@@ -24,10 +37,29 @@ public class FitnessApp {
     private JsonWriterPhysicalInfo jsonWriter2;
     private JsonReaderPhysicalInfo jsonReader2;
     private JsonReader jsonReader;
+    private JList list;
+    private static final String AddString = "Add";
+    private JTextField foodName;
+    private DefaultListModel listModel;
 
     //EFFECTS: construct a daily consumption and runs the application
-    public FitnessApp() throws FileNotFoundException {
+    static void createAndShowGUI() throws FileNotFoundException {
+        //Create and set up the window.
+        JFrame frame = new JFrame("food list");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //Create and set up the content pane.
+        JComponent newContentPane = new FitnessAppGUI();
+        newContentPane.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(newContentPane);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public FitnessAppGUI() throws FileNotFoundException {
+        super(new BorderLayout());
         input = new Scanner(System.in);
 
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -35,9 +67,150 @@ public class FitnessApp {
         jsonWriter2 = new JsonWriterPhysicalInfo(JSON_STORE2);
         jsonReader2 = new JsonReaderPhysicalInfo(JSON_STORE2);
 
-        runFitnessApp();
+
+        //create the list and put it in a scroll pane.
+
+        listModel = new DefaultListModel<>();
+/*
+        listModel.addElement("oats");
+        listModel.addElement("egg");
+        listModel.addElement("milk");
+
+ */
+
+
+
+
+        list = new JList<>(listModel);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setSelectedIndex(0);
+        list.addListSelectionListener(this);
+        list.setVisibleRowCount(5);
+        JScrollPane listScrollPane = new JScrollPane(list);
+
+        JButton addButton = new JButton(AddString);
+        AddListener addListener = new AddListener(addButton);
+        addButton.setActionCommand(AddString);
+        addButton.addActionListener(addListener);
+        addButton.setEnabled(false);
+
+        foodName = new JTextField(10);
+        foodName.addActionListener(addListener);
+        foodName.getDocument().addDocumentListener(addListener);
+
+        /*
+        String name = listModel.getElementAt(
+              list.getSelectedIndex()).toString();
+
+         */
+
+        //Create a panel that uses boxlayout.
+        JPanel buttonPane = new JPanel();
+        buttonPane.setLayout(new BoxLayout(buttonPane,
+                BoxLayout.LINE_AXIS));
+        buttonPane.add(addButton);
+        buttonPane.add(Box.createHorizontalStrut(5));
+        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
+        buttonPane.add(Box.createHorizontalStrut(5));
+        buttonPane.add(foodName);
+
+        buttonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        add(listScrollPane, BorderLayout.CENTER);
+        add(buttonPane, BorderLayout.PAGE_END);
+
+
+        //runFitnessApp();
 
     }
+
+    public class AddListener implements ActionListener, DocumentListener {
+        private boolean alreadyEnabled = false;
+        private JButton button;
+
+        public AddListener(JButton button) {
+            this.button = button;
+        }
+
+        //Required by actionlister
+        public void actionPerformed(ActionEvent e) {
+            String name = foodName.getText();
+
+            //User didn't type in a unique name...
+            if (name.equals("") || alreadyInList(name)) {
+                Toolkit.getDefaultToolkit().beep();
+                foodName.requestFocusInWindow();
+                foodName.selectAll();
+                return;
+            }
+            /*
+            int index = list.getSelectedIndex(); //get selected index
+
+            if (index == -1) { //no selection, so insert at beginning
+                index = 0;
+            } else {           //add after the selected item
+                index++;
+            }
+
+             */
+
+
+
+            listModel.insertElementAt(foodName.getText(), listModel.getSize());
+            //If we just wanted to add to the end, we'd do this:
+            //listModel.addElement(foodName.getText());
+
+            //Reset the text field.
+            foodName.requestFocusInWindow();
+            foodName.setText("");
+
+            //Select the new item and make it visible.
+            //list.setSelectedIndex(index);
+            //list.ensureIndexIsVisible(index);
+        }
+
+        //This method tests for string equality. You could certainly
+        //get more sophisticated about the algorithm.  For example,
+        //you might want to ignore white space and capitalization.
+        protected boolean alreadyInList(String name) {
+            return listModel.contains(name);
+        }
+
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            enableButton();
+
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            handleEmptyTextField(e);
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            if (!handleEmptyTextField(e)) {
+                enableButton();
+            }
+        }
+
+        private void enableButton() {
+            if (!alreadyEnabled) {
+                button.setEnabled(true);
+            }
+        }
+
+        private boolean handleEmptyTextField(DocumentEvent e) {
+            if (e.getDocument().getLength() <= 0) {
+                button.setEnabled(false);
+                alreadyEnabled = false;
+                return true;
+            }
+            return false;
+        }
+
+
+    }
+
 
     //MODIFIES: this
     //Effects: send out command to guide user setup their physical info
@@ -195,6 +368,7 @@ public class FitnessApp {
         }
     }
 
+
     //MODIFIES: this
     //EFFECTS: loads daily consumption from file
     private void loadDailyConsumption() {
@@ -288,6 +462,10 @@ public class FitnessApp {
         }
     }
 
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+
+    }
 }
 
 

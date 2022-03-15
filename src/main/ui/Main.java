@@ -2,14 +2,20 @@ package ui;
 
 import java.io.FileNotFoundException;
 
+import static ui.FitnessAppGUI.createAndShowGUI;
+
 public class Main {
     public static void main(String[] args) {
-        try {
-            new FitnessApp();
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to run application: file not found");
-
-        }
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    createAndShowGUI();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
+
