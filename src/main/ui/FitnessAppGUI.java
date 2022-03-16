@@ -7,6 +7,7 @@ import persistence.JsonReader;
 import persistence.JsonReaderPhysicalInfo;
 import persistence.JsonWriter;
 import persistence.JsonWriterPhysicalInfo;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -16,10 +17,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import java.awt.*;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -27,7 +25,7 @@ import java.util.Scanner;
 
 
 public class FitnessAppGUI extends JPanel
-                           implements ListSelectionListener {
+        implements ListSelectionListener {
     private static final String JSON_STORE = "./data/dailyConsumption.json";
     private static final String JSON_STORE2 = "./data/physicalInfo.json";
     private PhysicalInfo physicalInfo;
@@ -38,7 +36,9 @@ public class FitnessAppGUI extends JPanel
     private JsonReaderPhysicalInfo jsonReader2;
     private JsonReader jsonReader;
     private JList list;
+    private JButton removeButton;
     private static final String AddString = "Add";
+    private static final String RemoveString = "Remove";
     private JTextField foodName;
     private DefaultListModel listModel;
 
@@ -78,9 +78,6 @@ public class FitnessAppGUI extends JPanel
 
  */
 
-
-
-
         list = new JList<>(listModel);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setSelectedIndex(0);
@@ -98,6 +95,11 @@ public class FitnessAppGUI extends JPanel
         foodName.addActionListener(addListener);
         foodName.getDocument().addDocumentListener(addListener);
 
+        removeButton = new JButton(RemoveString);
+        removeButton.setActionCommand("remove");
+        removeButton.addActionListener(new RemoveListener());
+
+
         /*
         String name = listModel.getElementAt(
               list.getSelectedIndex()).toString();
@@ -108,20 +110,47 @@ public class FitnessAppGUI extends JPanel
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane,
                 BoxLayout.LINE_AXIS));
+        buttonPane.add(removeButton);
+        buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(addButton);
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(foodName);
 
-        buttonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
-
-
-        //runFitnessApp();
-
     }
+
+    class RemoveListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            //This method can be called only if
+            //there's a valid selection
+            //so go ahead and remove whatever's selected.
+            int index = list.getSelectedIndex();
+            listModel.remove(index);
+
+            int size = listModel.getSize();
+
+            if (size == 0) { //Nobody's left, disable firing.
+                removeButton.setEnabled(false);
+
+            } else { //Select an index.
+                if (index == listModel.getSize()) {
+                    //removed item in last position
+                    index--;
+                }
+
+                list.setSelectedIndex(index);
+                list.ensureIndexIsVisible(index);
+            }
+        }
+    }
+
+
+    //runFitnessApp();
+
 
     public class AddListener implements ActionListener, DocumentListener {
         private boolean alreadyEnabled = false;
@@ -134,6 +163,10 @@ public class FitnessAppGUI extends JPanel
         //Required by actionlister
         public void actionPerformed(ActionEvent e) {
             String name = foodName.getText();
+            //add user input to daily consumption's foodlist
+            FoodItem inputFoodItem = new FoodItem(name, 100);
+            dailyConsumption = new DailyConsumption("Today's Calories", 1500);
+            dailyConsumption.addFoodItem(inputFoodItem);
 
             //User didn't type in a unique name...
             if (name.equals("") || alreadyInList(name)) {
@@ -154,7 +187,6 @@ public class FitnessAppGUI extends JPanel
              */
 
 
-
             listModel.insertElementAt(foodName.getText(), listModel.getSize());
             //If we just wanted to add to the end, we'd do this:
             //listModel.addElement(foodName.getText());
@@ -167,6 +199,7 @@ public class FitnessAppGUI extends JPanel
             //list.setSelectedIndex(index);
             //list.ensureIndexIsVisible(index);
         }
+
 
         //This method tests for string equality. You could certainly
         //get more sophisticated about the algorithm.  For example,
@@ -286,8 +319,6 @@ public class FitnessAppGUI extends JPanel
 
         }
     }
-
-
 
 
     //EFFECTS:display menu for user to choose

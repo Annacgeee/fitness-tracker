@@ -3,6 +3,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Objects;
+
 public class FoodItem implements Writable {
     private String foodName;
     private int calories;
@@ -38,6 +40,16 @@ public class FoodItem implements Writable {
         return foodName + " : " + calories;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FoodItem foodItem = (FoodItem) o;
+        return calories == foodItem.calories && Objects.equals(foodName, foodItem.foodName);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(foodName, calories);
+    }
 }
