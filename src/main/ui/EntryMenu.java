@@ -20,7 +20,7 @@ public class EntryMenu extends JPanel implements ActionListener {
     public static void showMenuEntry() {
 
         //Create and set up the window.
-        JFrame frame = new JFrame("ButtonDemo");
+        JFrame frame = new JFrame("Menu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
@@ -62,9 +62,9 @@ public class EntryMenu extends JPanel implements ActionListener {
         add(b2);
         add(b3);
         add(b4);
-    }
 
-    public void setUpButtonListener() {
+//}
+    //public void setUpButtonListener() {
         ActionListener b1Listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,7 +108,6 @@ public class EntryMenu extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-
+        //
     }
 }
