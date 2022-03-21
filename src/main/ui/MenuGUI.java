@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.scene.shape.Box;
 import model.PhysicalInfo;
 
 import javax.swing.*;
@@ -10,16 +11,20 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class MenuGUI extends JPanel implements ActionListener, FocusListener {
-    private final static int GAP = 10;
-    private JTextField weightField, heightField, ageField;
+
+    private JTextField weightField;
+    private JTextField heightField;
+    private JTextField ageField;
     private JButton button;
     private PhysicalInfo physicalInfo;
     private JSpinner genderSpinner;
+    private final static int GAP = 10;
 
     static void displayUserMenu() {
         //Create and set up the window.
         JFrame frame = new JFrame("Please input your physical information");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
         //Add contents to the window.
         frame.add(new MenuGUI());
@@ -33,6 +38,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
         JPanel panel = new JPanel();
 
+
         panel.setLayout(new BoxLayout(panel,
                 BoxLayout.LINE_AXIS));
         panel.add(createEntryFields());
@@ -41,26 +47,28 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
     }
 
     protected JComponent createButtons() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
+        JPanel buttonPane = new JPanel(new FlowLayout(FlowLayout.TRAILING));
+        //buttonPane.setLayout();
 
-        button = new JButton("Next");
+        JButton button = new JButton("Next");
         button.addActionListener(this);
-        panel.add(button);
+        buttonPane.add(button);
 
 
-        panel.setBorder(BorderFactory.createEmptyBorder(0, 0,
+        buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 0,
                 GAP - 5, GAP - 5));
-        return panel;
+        return buttonPane;
     }
 
     protected JComponent createEntryFields() {
         JPanel panel = new JPanel(new SpringLayout());
 
+
         String[] labelStrings = {
                 "Weight in kg: ",
                 "Height in cm: ",
                 "Age: ",
-                "gender",
+                "gender: ",
 
         };
 
@@ -104,9 +112,6 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
             }
             tf.addActionListener(this);
             tf.addFocusListener(this);
-
-
-
 
 
         }
