@@ -1,5 +1,6 @@
 package ui;
 
+import model.DailyConsumption;
 import model.PhysicalInfo;
 
 import javax.swing.*;
@@ -16,20 +17,20 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
     private JTextField weightField;
     private JTextField heightField;
     private JTextField ageField;
-    private JButton button;
     private PhysicalInfo physicalInfo;
+    private StorageController storageController;
     private JSpinner genderSpinner;
-    private FitnessAppGUI fitnessAppGUI;
-    private final static int GAP = 10;
+    //private FitnessAppGUI fitnessAppGUI;
+    //private final static int GAP = 10;
 
-    static void displayUserMenu() {
+    static void displayUserMenu(PhysicalInfo physicalInfo, StorageController storageController) {
         //Create and set up the window.
         JFrame frame = new JFrame("Please input your physical information");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Display the window.
 
-        MenuGUI newContentPane = new MenuGUI();
+        MenuGUI newContentPane = new MenuGUI(physicalInfo, storageController);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
@@ -37,7 +38,11 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         frame.setVisible(true);
     }
 
-    public MenuGUI() {
+    public MenuGUI(PhysicalInfo physicalInfo, StorageController storageController) {
+
+        this.physicalInfo = physicalInfo;
+        this.storageController = storageController;
+
         //setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
         this.setPreferredSize(new Dimension(2000, 400));
 
@@ -78,10 +83,10 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
 
 
 
-                    physicalInfo = new PhysicalInfo(parseMyWeight,parseMyHeight,parseMyAge,parseMyGender);
+                    physicalInfo.setPhysicalInfo(parseMyWeight,parseMyHeight,parseMyAge,parseMyGender);
                 }
 
-                //fitnessAppGUI.savePhysicalInfo();
+                storageController.savePhysicalInfo(physicalInfo);
                 chooseGoal();
             }
         };

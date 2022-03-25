@@ -18,7 +18,7 @@ public class DailyConsumption implements Writable {
     //EFFECT:construct daily consumption contains the remaining calories for the day, and also the list of food that
     //       have been added, name of the consumption
 
-    public  DailyConsumption(String name, double remainingCalories) {
+    public DailyConsumption(String name, double remainingCalories) {
         this.remainingCalories = remainingCalories;
         this.foodItems = new ArrayList<>();
         this.name = name;

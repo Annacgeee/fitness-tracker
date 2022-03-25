@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 
-import static ui.FitnessAppGUI.createAndShowGUI;
+//import static ui.FitnessAppGUI.createAndShowGUI;
 import static ui.MenuGUI.displayUserMenu;
 import static ui.WeeklyGoalSelector.chooseWeeklyGoal;
 
@@ -53,7 +53,7 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
 
 
                 JLabel label = new JLabel();
-                label.setText("Your daily max calories is ");
+                label.setText("Your daily max calories is " + );
 
 
 

@@ -11,8 +11,8 @@ import java.io.FileNotFoundException;
 import java.util.jar.JarEntry;
 
 import static ui.EntryMenu.showMenuEntry;
-import static ui.FitnessAppGUI.createAndShowGUI;
-import static ui.MenuGUI.displayUserMenu;
+//import static ui.FitnessAppGUI.createAndShowGUI;
+//import static ui.MenuGUI.displayUserMenu;
 
 public class WeeklyGoalSelector extends JPanel implements ActionListener {
     private JButton b1;
@@ -105,7 +105,11 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         ActionListener b5Listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                showMenuEntry();
+                try {
+                    showMenuEntry();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
             }
         };
         b5.addActionListener(b5Listener);

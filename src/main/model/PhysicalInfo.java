@@ -2,8 +2,12 @@ package model;
 
 
 import org.json.JSONObject;
+import persistence.JsonReaderPhysicalInfo;
+import persistence.JsonWriterPhysicalInfo;
 import persistence.Writable;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 // physical info class that keeps users physical info and calculate calories needed
@@ -12,6 +16,8 @@ public class PhysicalInfo implements Writable {
     private int age;
     private double weight;
     private int height;
+
+
 
     private double caloriesNeeded;
     private static int caloriesNeededToLoseOneKG = 7700;// to lose 1kg, people must have 7700 calories deficit
@@ -47,6 +53,15 @@ public class PhysicalInfo implements Writable {
         kgToLosePerWeek.add(0.5);
         kgToLosePerWeek.add(0.8);
         kgToLosePerWeek.add(1.0);
+    }
+
+    public void setPhysicalInfo(double w, int h, int age, boolean gender) {
+        this.weight = w;
+        this.height = h;
+        this.age = age;
+        this.gender = gender;
+        //this.caloriesNeeded = caloriesNeeded;
+
     }
 
 

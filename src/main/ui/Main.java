@@ -3,7 +3,7 @@ package ui;
 import java.io.FileNotFoundException;
 
 import static ui.EntryMenu.showMenuEntry;
-import static ui.FitnessAppGUI.createAndShowGUI;
+//import static ui.FitnessAppGUI.createAndShowGUI;
 import static ui.MenuGUI.displayUserMenu;
 
 public class Main {
@@ -13,8 +13,12 @@ public class Main {
             public void run() {
                 //try {
                    // createAndShowGUI();
-                showMenuEntry();
-                    //displayUserMenu();
+                try {
+                    showMenuEntry();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                //displayUserMenu();
                     /*
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

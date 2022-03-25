@@ -2,6 +2,7 @@ package ui;
 
 import model.DailyConsumption;
 import model.PhysicalInfo;
+import ui.StorageController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
 
-import static ui.FitnessAppGUI.createAndShowGUI;
+import static ui.AddFoodItemGUI.createAndShowGUI;
+//import static ui.FitnessAppGUI.createAndShowGUI;
 import static ui.MenuGUI.displayUserMenu;
 
 public class EntryMenu extends JPanel implements ActionListener {
@@ -25,10 +27,12 @@ public class EntryMenu extends JPanel implements ActionListener {
     private JButton b4;
     private PhysicalInfo physicalInfo;
     private DailyConsumption dailyConsumption;
-    private FitnessAppGUI fitnessAppGUI;
+    private StorageController storageController;
+
+    // private FitnessAppGUI fitnessAppGUI;
 
 
-    public static void showMenuEntry() {
+    public static void showMenuEntry() throws FileNotFoundException {
 
         //Create and set up the window.
         JFrame frame = new JFrame("Main Menu");
@@ -48,7 +52,12 @@ public class EntryMenu extends JPanel implements ActionListener {
         frame.setVisible(true);
     }
 
-    public EntryMenu() {
+    public EntryMenu() throws FileNotFoundException {
+
+        physicalInfo = new PhysicalInfo(0,0,0,false,0);
+        dailyConsumption = new DailyConsumption("Today's Calories", 1500);
+        storageController = new StorageController();
+
         b1 = new JButton("Register my physical information");
         b1.setVerticalTextPosition(AbstractButton.CENTER);
         b1.setMnemonic(KeyEvent.VK_D);
@@ -75,12 +84,10 @@ public class EntryMenu extends JPanel implements ActionListener {
         add(b4);
         add(displayField);
 
-//}
-    //public void setUpButtonListener() {
         ActionListener b1Listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                displayUserMenu();
+                displayUserMenu(physicalInfo, storageController);
             }
         };
         b1.addActionListener(b1Listener);
@@ -112,7 +119,7 @@ public class EntryMenu extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 //System.out.println("saving");
                 //displayLoadingImage();
-                fitnessAppGUI.loadPhysicalInfo();
+                //fitnessAppGUI.loadPhysicalInfo();
             }
         };
         b4.addActionListener(b4Listener);
