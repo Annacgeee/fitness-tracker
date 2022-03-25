@@ -36,7 +36,6 @@ public class StorageController {
     private static final String physicalInfoJSON = "./data/physicalInfo.json";
 
 
-
     public StorageController() throws FileNotFoundException {
 
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -46,36 +45,35 @@ public class StorageController {
     }
 
 
-
-        //EFFECTS: save personal physical info
-        public void savePhysicalInfo(PhysicalInfo physicalInfo) {
-            try {
-                physicalInfoWriter.open();
-                physicalInfoWriter.write(physicalInfo);
-                physicalInfoWriter.close();
-                System.out.println("Physical information saved " + " to " + physicalInfoJSON);
-            } catch (FileNotFoundException e) {
-                System.out.println("Unable to write to file: " + physicalInfoJSON);
-            }
-
+    //EFFECTS: save personal physical info
+    public void savePhysicalInfo(PhysicalInfo physicalInfo) {
+        try {
+            physicalInfoWriter.open();
+            physicalInfoWriter.write(physicalInfo);
+            physicalInfoWriter.close();
+            System.out.println("Physical information saved " + " to " + physicalInfoJSON);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + physicalInfoJSON);
         }
 
-        //EFFECTS: load physical info
-        public PhysicalInfo loadPhysicalInfo() {
-            PhysicalInfo physicalInfo = null;
-            try {
-                physicalInfo = physicalInfoReader.read();
-                System.out.println("Physical information Loaded " + " from " + physicalInfoJSON);
-            } catch (IOException e) {
-                System.out.println("Unable to read from file: " + physicalInfoJSON);
-            }
-            return physicalInfo;
+    }
+
+    //EFFECTS: load physical info
+    public PhysicalInfo loadPhysicalInfo() {
+        PhysicalInfo physicalInfo = null;
+        try {
+            physicalInfo = physicalInfoReader.read();
+            System.out.println("Physical information Loaded " + " from " + physicalInfoJSON);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + physicalInfoJSON);
         }
+        return physicalInfo;
+    }
+
+
+
+
 /*
-
-
-
-
         //MODIFIES: this
         // EFFECTS: prints all the food items in daily consumption to console
         private void printFoodItems () {
@@ -89,17 +87,21 @@ public class StorageController {
             }
         }
 
-        //EFFECTS: save the food list to file
-        public void saveDailyConsumption () {
-            try {
-                jsonWriter.open();
-                jsonWriter.write(dailyConsumption);
-                jsonWriter.close();
-                System.out.println("Saved " + dailyConsumption.getName() + " to " + JSON_STORE);
-            } catch (FileNotFoundException e) {
-                System.out.println("Unable to write to file: " + JSON_STORE);
-            }
+ */
+
+    //EFFECTS: save the food list to file
+    public void saveDailyConsumption(DailyConsumption dailyConsumption) {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(dailyConsumption);
+            jsonWriter.close();
+            System.out.println("Saved " + dailyConsumption.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
         }
+    }
+
+        /*
 
 
         //MODIFIES: this
@@ -124,62 +126,14 @@ public class StorageController {
         }
 
 
-        // EFFECTS: parse menu option 0~3
-        private void parseMenuOptionPart1 ( int option){
-            switch (option) {
-                case 1:
-                    this.physicalInfo = initializePhysicalInfo();
-                    calculateCalories();
-                    dailyConsumption = new DailyConsumption(
-                            "Anna's daily consumption",
-                            physicalInfo.getCaloriesNeeded()
-                    );
-                    break;
-                case 2:
-                    printPhysicalInfo();
-                    break;
-                case 3:
-                    if (dailyConsumption == null) {
-                        System.out.println("Please initialize profile first!");
-                    } else {
-                        System.out.println("You have " + dailyConsumption.getRemainingCalories() + " remaining calories");
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
+      
 
 
-        // EFFECTS: parse menu option 4~6
-        private void parseMenuOptionPart2 ( int option){
-            switch (option) {
-                case 4:
-                    addFoodItem();
-                    break;
-                case 5:
-                    printFoodItems();
-                    break;
-                case 6:
-                    if (physicalInfo == null || dailyConsumption == null) {
-                        System.out.println("Please initialize profile first!");
-                        break;
-                    }
-                    savePhysicalInfo();
-                    saveDailyConsumption();
-                    break;
-                default:
-                    break;
-            }
-        }
+         */
 
-        @Override
-        public void valueChanged (ListSelectionEvent e){
 
-        }
-    }
 
- */
+
 }
 
 

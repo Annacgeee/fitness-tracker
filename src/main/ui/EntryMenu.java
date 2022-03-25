@@ -44,7 +44,6 @@ public class EntryMenu extends JPanel implements ActionListener {
         frame.setContentPane(newContentPane);
 
 
-
         //frame.add
 
         //Display the window.
@@ -54,7 +53,7 @@ public class EntryMenu extends JPanel implements ActionListener {
 
     public EntryMenu() throws FileNotFoundException {
 
-        physicalInfo = new PhysicalInfo(0,0,0,false,0);
+        physicalInfo = new PhysicalInfo(0, 0, 0, false, 0);
         dailyConsumption = new DailyConsumption("Today's Calories", 1500);
         storageController = new StorageController();
 
@@ -96,7 +95,7 @@ public class EntryMenu extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    createAndShowGUI();
+                    createAndShowGUI(dailyConsumption, storageController);
                 } catch (FileNotFoundException ex) {
                     ex.printStackTrace();
                 }
@@ -117,9 +116,25 @@ public class EntryMenu extends JPanel implements ActionListener {
         ActionListener b4Listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //System.out.println("saving");
-                //displayLoadingImage();
-                //fitnessAppGUI.loadPhysicalInfo();
+
+                JFrame frame = new JFrame();
+
+
+                JLabel label = new JLabel();
+                label.setText("You have consumed: " + dailyConsumption.getFoodItem());
+                label.setBounds(0, 30, 400, 50);
+                JLabel physicalInfoLabel = new JLabel();
+                physicalInfoLabel.setText("<html>" + "Weight: " + physicalInfo.getWeight() + "<br>"
+                        + "Height: " + physicalInfo.getHeight() + "<br>"
+                        + "Gender :" + physicalInfo.getGender() + "<br>" + "Age: " + physicalInfo.getAge() + "</html>");
+
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(400, 400);
+                frame.setVisible(true);
+                frame.add(label);
+                frame.add(physicalInfoLabel);
+                //frame.pack();
+
             }
         };
         b4.addActionListener(b4Listener);
@@ -132,21 +147,7 @@ public class EntryMenu extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //
     }
-/*
-    public void displayLoadingImage() {
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        try {
 
-        } catch (Exception e) {
-            System.out.println("image not found!");
-        }
-
-        frame.setSize(400,400);
-        frame.setVisible(true);
-    }
-
- */
 
     public void displayRemainingCalories() {
         frame = new JFrame();
@@ -156,19 +157,17 @@ public class EntryMenu extends JPanel implements ActionListener {
         JLabel label1 = new JLabel(Double.toString(dailyConsumption.getRemainingCalories()));
 
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(300,100));
+        panel.setPreferredSize(new Dimension(300, 100));
         panel.add(label);
         panel.add(label1);
 
         frame.getContentPane().add(panel);
         frame.pack();
 
-        //frame.setSize(400,400);
+
         frame.setVisible(true);
 
     }
-
-
 
 
 }

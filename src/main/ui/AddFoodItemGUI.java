@@ -12,24 +12,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class AddFoodItemGUI extends JPanel
-                            implements ListSelectionListener {
+        implements ListSelectionListener {
     private JList list;
-    private JButton removeButton;
+    private JButton saveBotton;
     private static final String AddString = "Add";
-    private static final String RemoveString = "Remove";
+    private static final String saveString = "Save";
     private JTextField foodName;
     private DefaultListModel listModel;
+    private DailyConsumption dailyConsumption;
+    private StorageController storageController;
+    private FoodItem foodItem;
+    private List foodList;
 
     //EFFECTS: construct a daily consumption and runs the application
-    static void createAndShowGUI() throws FileNotFoundException {
+    static void createAndShowGUI(DailyConsumption dailyConsumption, StorageController storageController)
+            throws FileNotFoundException {
         //Create and set up the window.
         JFrame frame = new JFrame("food list");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        JComponent newContentPane = new AddFoodItemGUI();
+        JComponent newContentPane = new AddFoodItemGUI(dailyConsumption, storageController);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
@@ -38,7 +44,9 @@ public class AddFoodItemGUI extends JPanel
         frame.setVisible(true);
     }
 
-    public AddFoodItemGUI() {
+    public AddFoodItemGUI(DailyConsumption dailyConsumption, StorageController storageController) {
+        this.dailyConsumption = dailyConsumption;
+        this.storageController = storageController;
         listModel = new DefaultListModel<>();
 
         list = new JList<>(listModel);
@@ -58,15 +66,15 @@ public class AddFoodItemGUI extends JPanel
         foodName.addActionListener(addListener);
         foodName.getDocument().addDocumentListener(addListener);
 
-        removeButton = new JButton(RemoveString);
-        removeButton.setActionCommand("remove");
-        removeButton.addActionListener(new AddFoodItemGUI.RemoveListener());
+        saveBotton = new JButton(saveString);
+        saveBotton.setActionCommand("save");
+        saveBotton.addActionListener(new AddFoodItemGUI.SaveListener());
 
         //Create a panel that uses boxlayout.
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane,
                 BoxLayout.LINE_AXIS));
-        buttonPane.add(removeButton);
+        buttonPane.add(saveBotton);
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(addButton);
         buttonPane.add(Box.createHorizontalStrut(5));
@@ -85,18 +93,22 @@ public class AddFoodItemGUI extends JPanel
     }
 
 
-    class RemoveListener implements ActionListener {
+    class SaveListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            storageController.saveDailyConsumption(dailyConsumption);
+
+
             //This method can be called only if
             //there's a valid selection
             //so go ahead and remove whatever's selected.
+            /*
             int index = list.getSelectedIndex();
             listModel.remove(index);
 
             int size = listModel.getSize();
 
             if (size == 0) { //Nobody's left, disable firing.
-                removeButton.setEnabled(false);
+                saveBotton.setEnabled(false);
 
             } else { //Select an index.
                 if (index == listModel.getSize()) {
@@ -106,9 +118,13 @@ public class AddFoodItemGUI extends JPanel
 
                 list.setSelectedIndex(index);
                 list.ensureIndexIsVisible(index);
-            }
+
+             */
+
+
         }
     }
+
 
     public class AddListener implements ActionListener, DocumentListener {
         private boolean alreadyEnabled = false;
@@ -121,9 +137,11 @@ public class AddFoodItemGUI extends JPanel
         //Required by actionlister
         public void actionPerformed(ActionEvent e) {
             String name = foodName.getText();
+
+
             //add user input to daily consumption's foodlist
             FoodItem inputFoodItem = new FoodItem(name, 100);
-            //dailyConsumption.addFoodItem(inputFoodItem);
+            dailyConsumption.addFoodItem(inputFoodItem);
 
             //User didn't type in a unique name...
             if (name.equals("") || alreadyInList(name)) {
@@ -132,16 +150,6 @@ public class AddFoodItemGUI extends JPanel
                 foodName.selectAll();
                 return;
             }
-            /*
-            int index = list.getSelectedIndex(); //get selected index
-
-            if (index == -1) { //no selection, so insert at beginning
-                index = 0;
-            } else {           //add after the selected item
-                index++;
-            }
-
-             */
 
 
             listModel.insertElementAt(foodName.getText(), listModel.getSize());

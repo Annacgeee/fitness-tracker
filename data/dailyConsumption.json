@@ -1,17 +1,21 @@
 {
-    "name": "Anna's daily consumption",
-    "remainingCalories": 945,
+    "name": "Today's Calories",
+    "remainingCalories": 1100,
     "foodItems": [
         {
-            "name": "egg",
+            "name": "dsf",
             "calories": 100
         },
         {
-            "name": "chocolate",
+            "name": "dfs",
             "calories": 100
         },
         {
-            "name": "berries",
+            "name": "EWR",
+            "calories": 100
+        },
+        {
+            "name": "ER",
             "calories": 100
         }
     ]

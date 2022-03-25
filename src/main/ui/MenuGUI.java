@@ -87,7 +87,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
                 }
 
                 storageController.savePhysicalInfo(physicalInfo);
-                chooseGoal();
+                chooseGoal(physicalInfo,storageController);
             }
         };
         button.addActionListener(b1Listener);
