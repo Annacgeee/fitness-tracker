@@ -67,24 +67,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
                 int parseMyHeight = 0;
                 int parseMyAge = 0;
                 boolean parseMyGender = false;
-                if (e.getSource() == button) {
-                    String myWeight = weightField.getText();
-                    parseMyWeight = Double.parseDouble(myWeight);
-                    String myHeight = heightField.getText();
-                    parseMyHeight = Integer.parseInt(myHeight);
-                    String myAge = weightField.getText();
-                    parseMyAge = Integer.parseInt(myAge);
-                    String genderString = genderSpinner.toString();
-                    if (genderString == "female") {
-                        parseMyGender = true;
-                    } else {
-                        parseMyGender = false;
-                    }
-
-
-
-                    physicalInfo.setPhysicalInfo(parseMyWeight,parseMyHeight,parseMyAge,parseMyGender);
-                }
+                initializeInfo(e, button);
 
                 storageController.savePhysicalInfo(physicalInfo);
                 chooseGoal(physicalInfo,storageController);
@@ -93,6 +76,31 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         button.addActionListener(b1Listener);
 
         return buttonPane;
+    }
+
+    private void initializeInfo(ActionEvent e, JButton button) {
+        double parseMyWeight;
+        boolean parseMyGender;
+        int parseMyAge;
+        int parseMyHeight;
+        if (e.getSource() == button) {
+            String myWeight = weightField.getText();
+            parseMyWeight = Double.parseDouble(myWeight);
+            String myHeight = heightField.getText();
+            parseMyHeight = Integer.parseInt(myHeight);
+            String myAge = weightField.getText();
+            parseMyAge = Integer.parseInt(myAge);
+            String genderString = genderSpinner.toString();
+            if (genderString == "female") {
+                parseMyGender = true;
+            } else {
+                parseMyGender = false;
+            }
+
+
+
+            physicalInfo.setPhysicalInfo(parseMyWeight,parseMyHeight,parseMyAge,parseMyGender);
+        }
     }
 
     public JComponent createEntryFields() {
@@ -112,9 +120,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         int fieldNum = 0;
 
         //Create the text field and set it up.
-        weightField = new JTextField();
-        weightField.setColumns(20);
-        fields[fieldNum++] = weightField;
+        fieldNum = weightField(fields, fieldNum);
 
         heightField = new JTextField();
         heightField.setColumns(20);
@@ -130,7 +136,18 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         fields[fieldNum++] = genderSpinner;
 
         //associate label/field pairs, add everything
-        // and lay it out
+        matchLabels(panel, labelStrings, labels, fields);
+        return panel;
+    }
+
+    private int weightField(JComponent[] fields, int fieldNum) {
+        weightField = new JTextField();
+        weightField.setColumns(20);
+        fields[fieldNum++] = weightField;
+        return fieldNum;
+    }
+
+    private void matchLabels(JPanel panel, String[] labelStrings, JLabel[] labels, JComponent[] fields) {
         for (int i = 0; i < labelStrings.length; i++) {
             labels[i] = new JLabel(labelStrings[i],
                     JLabel.TRAILING);
@@ -150,7 +167,6 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
 
 
         }
-        return panel;
     }
 
     public String[] getGenderStrings() {

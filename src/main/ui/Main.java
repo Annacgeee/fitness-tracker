@@ -11,20 +11,13 @@ public class Main {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                //try {
-                   // createAndShowGUI();
+
                 try {
                     showMenuEntry();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                //displayUserMenu();
-                    /*
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
 
-                     */
             }
         });
     }

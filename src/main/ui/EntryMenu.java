@@ -83,6 +83,13 @@ public class EntryMenu extends JPanel implements ActionListener {
         add(b4);
         add(displayField);
 
+        listener();
+
+
+    }
+
+
+    private void listener() {
         ActionListener b1Listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,17 +98,7 @@ public class EntryMenu extends JPanel implements ActionListener {
         };
         b1.addActionListener(b1Listener);
 
-        ActionListener b2Listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    createAndShowGUI(dailyConsumption, storageController);
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        };
-        b2.addActionListener(b2Listener);
+        b2Listener();
 
         ActionListener b3Listener = new ActionListener() {
             @Override
@@ -113,6 +110,24 @@ public class EntryMenu extends JPanel implements ActionListener {
         };
         b3.addActionListener(b3Listener);
 
+        labelListener();
+    }
+
+    private void b2Listener() {
+        ActionListener b2Listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    createAndShowGUI(dailyConsumption, storageController);
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        b2.addActionListener(b2Listener);
+    }
+
+    private void labelListener() {
         ActionListener b4Listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -138,8 +153,6 @@ public class EntryMenu extends JPanel implements ActionListener {
             }
         };
         b4.addActionListener(b4Listener);
-
-
     }
 
 

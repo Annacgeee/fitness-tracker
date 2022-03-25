@@ -71,6 +71,10 @@ public class AddFoodItemGUI extends JPanel
         saveBotton.addActionListener(new AddFoodItemGUI.SaveListener());
 
         //Create a panel that uses boxlayout.
+        createPanel(listScrollPane, addButton);
+    }
+
+    private void createPanel(JScrollPane listScrollPane, JButton addButton) {
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane,
                 BoxLayout.LINE_AXIS));

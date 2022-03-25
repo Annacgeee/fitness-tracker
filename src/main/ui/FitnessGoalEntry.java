@@ -52,6 +52,11 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
         add(b1);
         add(b2);
 
+        listeners(physicalInfo, storageController);
+
+    }
+
+    private void listeners(PhysicalInfo physicalInfo, StorageController storageController) {
         ActionListener b1Listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,9 +66,6 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
 
                 JLabel label = new JLabel();
                 label.setText("Your daily max calories is " + physicalInfo.calculateCaloriesNeededForMaintainWeight());
-
-
-
 
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(300,200);
@@ -77,11 +79,10 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
         ActionListener b2Listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                chooseWeeklyGoal(physicalInfo,storageController);
+                chooseWeeklyGoal(physicalInfo, storageController);
             }
         };
         b2.addActionListener(b2Listener);
-
     }
 
     @Override
