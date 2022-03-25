@@ -1,6 +1,5 @@
 package ui;
 
-import javafx.scene.shape.Box;
 import model.PhysicalInfo;
 
 import javax.swing.*;
@@ -10,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import static ui.FitnessGoalEntry.chooseGoal;
+
 public class MenuGUI extends JPanel implements ActionListener, FocusListener {
 
     private JTextField weightField;
@@ -18,6 +19,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
     private JButton button;
     private PhysicalInfo physicalInfo;
     private JSpinner genderSpinner;
+    private FitnessAppGUI fitnessAppGUI;
     private final static int GAP = 10;
 
     static void displayUserMenu() {
@@ -25,24 +27,22 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         JFrame frame = new JFrame("Please input your physical information");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-        //Add contents to the window.
-        frame.add(new MenuGUI());
-
         //Display the window.
+
+        MenuGUI newContentPane = new MenuGUI();
+        newContentPane.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(newContentPane);
+
         frame.pack();
         frame.setVisible(true);
     }
 
     public MenuGUI() {
-        setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-        JPanel panel = new JPanel();
+        //setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+        this.setPreferredSize(new Dimension(2000, 400));
 
-
-        panel.setLayout(new BoxLayout(panel,
-                BoxLayout.LINE_AXIS));
-        panel.add(createEntryFields());
-        panel.add(createButtons());
+        this.add(createEntryFields());
+        this.add(createButtons());
 
     }
 
@@ -55,13 +55,43 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         buttonPane.add(button);
 
 
-        buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 0,
-                GAP - 5, GAP - 5));
+        ActionListener b1Listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double parseMyWeight = 0;
+                int parseMyHeight = 0;
+                int parseMyAge = 0;
+                boolean parseMyGender = false;
+                if (e.getSource() == button) {
+                    String myWeight = weightField.getText();
+                    parseMyWeight = Double.parseDouble(myWeight);
+                    String myHeight = heightField.getText();
+                    parseMyHeight = Integer.parseInt(myHeight);
+                    String myAge = weightField.getText();
+                    parseMyAge = Integer.parseInt(myAge);
+                    String genderString = genderSpinner.toString();
+                    if (genderString == "female") {
+                        parseMyGender = true;
+                    } else {
+                        parseMyGender = false;
+                    }
+
+
+
+                    physicalInfo = new PhysicalInfo(parseMyWeight,parseMyHeight,parseMyAge,parseMyGender);
+                }
+
+                //fitnessAppGUI.savePhysicalInfo();
+                chooseGoal();
+            }
+        };
+        button.addActionListener(b1Listener);
+
         return buttonPane;
     }
 
-    protected JComponent createEntryFields() {
-        JPanel panel = new JPanel(new SpringLayout());
+    public JComponent createEntryFields() {
+        JPanel panel = new JPanel();
 
 
         String[] labelStrings = {
@@ -141,26 +171,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        double parseMyWeight = 0;
-        int parseMyHeight = 0;
-        int parseMyAge = 0;
-        boolean parseMyGender = false;
-        if (e.getSource() == button) {
-            String myWeight = weightField.getText();
-            parseMyWeight = Double.parseDouble(myWeight);
-            String myHeight = heightField.getText();
-            parseMyHeight = Integer.parseInt(myHeight);
-            String myAge = weightField.getText();
-            parseMyAge = Integer.parseInt(myAge);
-            String genderString = genderSpinner.toString();
-            if (genderString == "female") {
-                parseMyGender = true;
-            } else {
-                parseMyGender = false;
-            }
-
-            physicalInfo = new PhysicalInfo(parseMyWeight,parseMyHeight,parseMyAge,parseMyGender);
-        }
+  //
 
     }
 
@@ -173,4 +184,6 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
     public void focusLost(FocusEvent e) {
 
     }
+
+
 }

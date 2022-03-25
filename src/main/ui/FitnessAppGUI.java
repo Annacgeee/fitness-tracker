@@ -412,7 +412,7 @@ public class FitnessAppGUI extends JPanel
     }
 
     //EFFECTS: save personal physical info
-    private void savePhysicalInfo() {
+    public void savePhysicalInfo() {
         try {
             jsonWriter2.open();
             jsonWriter2.write(physicalInfo);
@@ -425,7 +425,7 @@ public class FitnessAppGUI extends JPanel
     }
 
     //EFFECTS: load physical info
-    private void loadPhysicalInfo() {
+    public void loadPhysicalInfo() {
         try {
             physicalInfo = jsonReader2.read();
             System.out.println("Physical information Loaded " + " from " + JSON_STORE2);
