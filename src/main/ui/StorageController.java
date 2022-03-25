@@ -9,7 +9,7 @@ import persistence.JsonWriterPhysicalInfo;
 
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 
 public class StorageController {
@@ -46,6 +46,7 @@ public class StorageController {
 
     }
 
+    /*
     //EFFECTS: load physical info
     public PhysicalInfo loadPhysicalInfo() {
         PhysicalInfo physicalInfo = null;
@@ -57,6 +58,8 @@ public class StorageController {
         }
         return physicalInfo;
     }
+
+     */
 
 
 

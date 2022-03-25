@@ -63,10 +63,10 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         ActionListener b1Listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double parseMyWeight = 0;
-                int parseMyHeight = 0;
-                int parseMyAge = 0;
-                boolean parseMyGender = false;
+                //double parseMyWeight = 0;
+                //int parseMyHeight = 0;
+                //int parseMyAge = 0;
+                //boolean parseMyGender = false;
                 initializeInfo(e, button);
 
                 storageController.savePhysicalInfo(physicalInfo);

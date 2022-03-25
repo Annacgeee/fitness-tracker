@@ -8,11 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 
-import java.util.jar.JarEntry;
+
 
 import static ui.EntryMenu.showMenuEntry;
-//import static ui.FitnessAppGUI.createAndShowGUI;
-//import static ui.MenuGUI.displayUserMenu;
+
 
 public class WeeklyGoalSelector extends JPanel implements ActionListener {
     private JButton b1;
@@ -20,7 +19,7 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
     private JButton b3;
     private JButton b4;
     private JButton b5;
-    private PhysicalInfo physicalInfo;
+
 
     public static void chooseWeeklyGoal(PhysicalInfo physicalInfo, StorageController storageController) {
         JFrame frame = new JFrame("Please choose your goal");

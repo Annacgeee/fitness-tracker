@@ -42,8 +42,11 @@ public class FoodItem implements Writable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        } else if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FoodItem foodItem = (FoodItem) o;
         return calories == foodItem.calories && Objects.equals(foodName, foodItem.foodName);
     }
