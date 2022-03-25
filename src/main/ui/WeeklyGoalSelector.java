@@ -22,12 +22,12 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
     private JButton b5;
     private PhysicalInfo physicalInfo;
 
-    public static void chooseWeeklyGoal(PhysicalInfo physicalInfo,StorageController storageController) {
+    public static void chooseWeeklyGoal(PhysicalInfo physicalInfo, StorageController storageController) {
         JFrame frame = new JFrame("Please choose your goal");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        WeeklyGoalSelector newContentPane = new WeeklyGoalSelector(physicalInfo,storageController);
+        WeeklyGoalSelector newContentPane = new WeeklyGoalSelector(physicalInfo, storageController);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
@@ -36,7 +36,7 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         frame.setVisible(true);
     }
 
-    public WeeklyGoalSelector(PhysicalInfo physicalInfo,StorageController storageController) {
+    public WeeklyGoalSelector(PhysicalInfo physicalInfo, StorageController storageController) {
         createButtons();
 
         b1ActionListener(physicalInfo, storageController);
@@ -78,10 +78,8 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
                 storageController.savePhysicalInfo(physicalInfo);
 
 
-
-
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(300,200);
+                frame.setSize(300, 200);
                 frame.setVisible(true);
                 frame.add(label);
             }
@@ -103,10 +101,8 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
                 storageController.savePhysicalInfo(physicalInfo);
 
 
-
-
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(300,200);
+                frame.setSize(300, 200);
                 frame.setVisible(true);
                 frame.add(label);
             }
@@ -126,10 +122,8 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
                 storageController.savePhysicalInfo(physicalInfo);
 
 
-
-
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(300,200);
+                frame.setSize(300, 200);
                 frame.setVisible(true);
                 frame.add(label);
             }
@@ -150,10 +144,8 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
                 storageController.savePhysicalInfo(physicalInfo);
 
 
-
-
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(300,200);
+                frame.setSize(300, 200);
                 frame.setVisible(true);
                 frame.add(label);
 

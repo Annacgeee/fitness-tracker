@@ -12,12 +12,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 public class AddFoodItemGUI extends JPanel
         implements ListSelectionListener {
     private JList list;
-    private JButton saveBotton;
+    private JButton saveButton;
     private static final String AddString = "Add";
     private static final String saveString = "Save";
     private JTextField foodName;
@@ -66,9 +65,9 @@ public class AddFoodItemGUI extends JPanel
         foodName.addActionListener(addListener);
         foodName.getDocument().addDocumentListener(addListener);
 
-        saveBotton = new JButton(saveString);
-        saveBotton.setActionCommand("save");
-        saveBotton.addActionListener(new AddFoodItemGUI.SaveListener());
+        saveButton = new JButton(saveString);
+        saveButton.setActionCommand("save");
+        saveButton.addActionListener(new AddFoodItemGUI.SaveListener());
 
         //Create a panel that uses boxlayout.
         createPanel(listScrollPane, addButton);
@@ -78,7 +77,7 @@ public class AddFoodItemGUI extends JPanel
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane,
                 BoxLayout.LINE_AXIS));
-        buttonPane.add(saveBotton);
+        buttonPane.add(saveButton);
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(addButton);
         buttonPane.add(Box.createHorizontalStrut(5));
@@ -104,7 +103,7 @@ public class AddFoodItemGUI extends JPanel
 
             //This method can be called only if
             //there's a valid selection
-            //so go ahead and remove whatever's selected.
+            //so go ahead and remove whatever is selected.
             /*
             int index = list.getSelectedIndex();
             listModel.remove(index);
@@ -112,7 +111,7 @@ public class AddFoodItemGUI extends JPanel
             int size = listModel.getSize();
 
             if (size == 0) { //Nobody's left, disable firing.
-                saveBotton.setEnabled(false);
+                saveButton.setEnabled(false);
 
             } else { //Select an index.
                 if (index == listModel.getSize()) {
@@ -138,12 +137,12 @@ public class AddFoodItemGUI extends JPanel
             this.button = button;
         }
 
-        //Required by actionlister
+
         public void actionPerformed(ActionEvent e) {
             String name = foodName.getText();
 
 
-            //add user input to daily consumption's foodlist
+            //add user input to daily consumption's foodList
             FoodItem inputFoodItem = new FoodItem(name, 100);
             dailyConsumption.addFoodItem(inputFoodItem);
 

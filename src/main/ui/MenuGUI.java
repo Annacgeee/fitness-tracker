@@ -70,7 +70,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
                 initializeInfo(e, button);
 
                 storageController.savePhysicalInfo(physicalInfo);
-                chooseGoal(physicalInfo,storageController);
+                chooseGoal(physicalInfo, storageController);
             }
         };
         button.addActionListener(b1Listener);
@@ -98,8 +98,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
             }
 
 
-
-            physicalInfo.setPhysicalInfo(parseMyWeight,parseMyHeight,parseMyAge,parseMyGender);
+            physicalInfo.setPhysicalInfo(parseMyWeight, parseMyHeight, parseMyAge, parseMyGender);
         }
     }
 
@@ -192,7 +191,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-  //
+        //
 
     }
 

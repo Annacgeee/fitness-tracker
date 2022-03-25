@@ -22,12 +22,12 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
     private DailyConsumption dailyConsumption;
     private StorageController storageController;
 
-    public static void chooseGoal(PhysicalInfo physicalInfo,StorageController storageController) {
+    public static void chooseGoal(PhysicalInfo physicalInfo, StorageController storageController) {
         JFrame frame = new JFrame("Please choose your goal");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        FitnessGoalEntry newContentPane = new FitnessGoalEntry(physicalInfo,storageController);
+        FitnessGoalEntry newContentPane = new FitnessGoalEntry(physicalInfo, storageController);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
@@ -36,7 +36,7 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
         frame.setVisible(true);
     }
 
-    public FitnessGoalEntry(PhysicalInfo physicalInfo,StorageController storageController) {
+    public FitnessGoalEntry(PhysicalInfo physicalInfo, StorageController storageController) {
         this.physicalInfo = physicalInfo;
         this.storageController = storageController;
 
@@ -68,7 +68,7 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
                 label.setText("Your daily max calories is " + physicalInfo.calculateCaloriesNeededForMaintainWeight());
 
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(300,200);
+                frame.setSize(300, 200);
                 frame.setVisible(true);
                 frame.add(label);
 

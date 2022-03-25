@@ -2,26 +2,14 @@ package ui;
 
 import model.PhysicalInfo;
 import model.DailyConsumption;
-import model.FoodItem;
 import persistence.JsonReader;
 import persistence.JsonReaderPhysicalInfo;
 import persistence.JsonWriter;
 import persistence.JsonWriterPhysicalInfo;
 
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
 
 
 public class StorageController {
@@ -36,7 +24,7 @@ public class StorageController {
     private static final String physicalInfoJSON = "./data/physicalInfo.json";
 
 
-    public StorageController() throws FileNotFoundException {
+    public StorageController() {
 
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -126,12 +114,10 @@ public class StorageController {
         }
 
 
-      
+
 
 
          */
-
-
 
 
 }
