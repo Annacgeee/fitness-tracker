@@ -11,7 +11,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import static ui.FitnessGoalEntry.chooseGoal;
+//Cite from https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html Label demo
 
+//physical info menu gui
 public class MenuGUI extends JPanel implements ActionListener, FocusListener {
 
     private JTextField weightField;
@@ -37,6 +39,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         frame.pack();
         frame.setVisible(true);
     }
+    // Effects: create a physical info menu gui
 
     public MenuGUI(PhysicalInfo physicalInfo, StorageController storageController) {
 
@@ -51,6 +54,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
 
     }
 
+    //EFFECTS: create buttons
     protected JComponent createButtons() {
         JPanel buttonPane = new JPanel(new FlowLayout(FlowLayout.TRAILING));
         //buttonPane.setLayout();
@@ -78,6 +82,8 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         return buttonPane;
     }
 
+    //MODIFIES: this
+    //EFFECTS: initialize physical information,
     private void initializeInfo(ActionEvent e, JButton button) {
         double parseMyWeight;
         boolean parseMyGender;
@@ -102,6 +108,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         }
     }
 
+    //EFFECTS: create entry for the textfield
     public JComponent createEntryFields() {
         JPanel panel = new JPanel();
 
@@ -139,6 +146,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         return panel;
     }
 
+    //EFFECTS: create weight field entry
     private int weightField(JComponent[] fields, int fieldNum) {
         weightField = new JTextField();
         weightField.setColumns(20);
@@ -146,6 +154,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         return fieldNum;
     }
 
+    //EFFECTS: match the label with text field entry
     private void matchLabels(JPanel panel, String[] labelStrings, JLabel[] labels, JComponent[] fields) {
         for (int i = 0; i < labelStrings.length; i++) {
             labels[i] = new JLabel(labelStrings[i],
@@ -168,6 +177,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         }
     }
 
+    //EFFECTS: generate gender strings
     public String[] getGenderStrings() {
         String[] genderStrings = {
                 "Female",
@@ -176,6 +186,7 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
         return genderStrings;
     }
 
+    //EFFECTS: generate spinner for gender
     public JFormattedTextField getTextField(JSpinner spinner) {
         JComponent editor = spinner.getEditor();
         if (editor instanceof JSpinner.DefaultEditor) {

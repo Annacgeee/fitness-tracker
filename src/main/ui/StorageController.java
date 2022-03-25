@@ -11,7 +11,7 @@ import persistence.JsonWriterPhysicalInfo;
 import java.io.FileNotFoundException;
 
 
-
+// EFFECTS: class to keep data persistence
 public class StorageController {
     private static final String JSON_STORE = "./data/dailyConsumption.json";
 

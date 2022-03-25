@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 
 import static ui.EntryMenu.showMenuEntry;
 
-
+//for user to select weekly fitness goal GUI
 public class WeeklyGoalSelector extends JPanel implements ActionListener {
     private JButton b1;
     private JButton b2;
@@ -35,6 +35,8 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         frame.setVisible(true);
     }
 
+    //EFFECTS: create goal seletor
+
     public WeeklyGoalSelector(PhysicalInfo physicalInfo, StorageController storageController) {
         createButtons();
 
@@ -51,6 +53,7 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
 
     }
 
+    //EFFECTS: actionlistener for button
     private void b5ActionListener() {
         ActionListener b5Listener = new ActionListener() {
             @Override
@@ -64,6 +67,9 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         };
         b5.addActionListener(b5Listener);
     }
+
+    // //EFFECTS: actionlistener for button
+
 
     private void b4ActionListener(PhysicalInfo physicalInfo, StorageController storageController) {
         ActionListener b4Listener = new ActionListener() {
@@ -85,6 +91,8 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         };
         b4.addActionListener(b4Listener);
     }
+
+    //EFFECTS: actionlistener for button
 
     private void b3ActionListener(PhysicalInfo physicalInfo, StorageController storageController) {
         ActionListener b3Listener = new ActionListener() {
@@ -109,6 +117,8 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         b3.addActionListener(b3Listener);
     }
 
+    //EFFECTS: actionlistener for button
+
     private void b2ActionListener(PhysicalInfo physicalInfo, StorageController storageController) {
         ActionListener b2Listener = new ActionListener() {
             @Override
@@ -129,6 +139,8 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         };
         b2.addActionListener(b2Listener);
     }
+
+    //EFFECTS: actionlistener for button
 
     private void b1ActionListener(PhysicalInfo physicalInfo, StorageController storageController) {
         ActionListener b1Listener = new ActionListener() {
@@ -153,6 +165,8 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         };
         b1.addActionListener(b1Listener);
     }
+    
+    //  //EFFECTS: create all buttons
 
     private void createButtons() {
         b1 = new JButton("I want to lose 0.2 kg per week");

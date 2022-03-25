@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
+//Cite from https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html listDemo
 public class AddFoodItemGUI extends JPanel
         implements ListSelectionListener {
     private JList list;
@@ -26,7 +27,7 @@ public class AddFoodItemGUI extends JPanel
     private FoodItem foodItem;
     private List foodList;
 
-    //EFFECTS: construct a daily consumption and runs the application
+    //EFFECTS: create entryfor gui
     static void createAndShowGUI(DailyConsumption dailyConsumption, StorageController storageController)
             throws FileNotFoundException {
         //Create and set up the window.
@@ -43,6 +44,8 @@ public class AddFoodItemGUI extends JPanel
         frame.setVisible(true);
     }
 
+    //modifies: this
+    //effect: addfooditem on panel list
     public AddFoodItemGUI(DailyConsumption dailyConsumption, StorageController storageController) {
         this.dailyConsumption = dailyConsumption;
         this.storageController = storageController;
@@ -73,6 +76,8 @@ public class AddFoodItemGUI extends JPanel
         createPanel(listScrollPane, addButton);
     }
 
+
+    //EFFECTS: create panel
     private void createPanel(JScrollPane listScrollPane, JButton addButton) {
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane,
@@ -96,39 +101,18 @@ public class AddFoodItemGUI extends JPanel
     }
 
 
+    // EFFECTS: action listerner for the button
     class SaveListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             storageController.saveDailyConsumption(dailyConsumption);
 
 
-            //This method can be called only if
-            //there's a valid selection
-            //so go ahead and remove whatever is selected.
-            /*
-            int index = list.getSelectedIndex();
-            listModel.remove(index);
-
-            int size = listModel.getSize();
-
-            if (size == 0) { //Nobody's left, disable firing.
-                saveButton.setEnabled(false);
-
-            } else { //Select an index.
-                if (index == listModel.getSize()) {
-                    //removed item in last position
-                    index--;
-                }
-
-                list.setSelectedIndex(index);
-                list.ensureIndexIsVisible(index);
-
-             */
 
 
         }
     }
 
-
+    // EFFECTS: action listerner for the button
     public class AddListener implements ActionListener, DocumentListener {
         private boolean alreadyEnabled = false;
         private JButton button;
@@ -194,6 +178,8 @@ public class AddFoodItemGUI extends JPanel
             }
         }
 
+
+        //effects: enable the button
         private void enableButton() {
             if (!alreadyEnabled) {
                 button.setEnabled(true);

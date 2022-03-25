@@ -29,9 +29,8 @@ public class EntryMenu extends JPanel implements ActionListener {
     private DailyConsumption dailyConsumption;
     private StorageController storageController;
 
-    // private FitnessAppGUI fitnessAppGUI;
 
-
+    //Cite from https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html button demo
     public static void showMenuEntry() throws FileNotFoundException {
 
         //Create and set up the window.
@@ -139,9 +138,14 @@ public class EntryMenu extends JPanel implements ActionListener {
                 label.setText("You have consumed: " + dailyConsumption.getFoodItem());
                 label.setBounds(0, 30, 400, 50);
                 JLabel physicalInfoLabel = new JLabel();
-                physicalInfoLabel.setText("<html>" + "Weight: " + physicalInfo.getWeight() + "<br>"
+                physicalInfoLabel.setText(physicalInfo.toString());
+
+                        /*
+                        "<html>" + "Weight: " + physicalInfo.getWeight() + "<br>"
                         + "Height: " + physicalInfo.getHeight() + "<br>"
                         + "Gender :" + physicalInfo.getGender() + "<br>" + "Age: " + physicalInfo.getAge() + "</html>");
+
+                         */
 
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(400, 400);
@@ -154,6 +158,9 @@ public class EntryMenu extends JPanel implements ActionListener {
         };
         b4.addActionListener(b4Listener);
     }
+
+
+
 
 
     @Override

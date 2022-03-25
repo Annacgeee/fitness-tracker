@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 //import static ui.FitnessAppGUI.createAndShowGUI;
 import static ui.MenuGUI.displayUserMenu;
 import static ui.WeeklyGoalSelector.chooseWeeklyGoal;
+//Cite from https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html button demo
 
 public class FitnessGoalEntry extends JPanel implements ActionListener {
     private JButton b1;
@@ -21,6 +22,7 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
     private PhysicalInfo physicalInfo;
     private DailyConsumption dailyConsumption;
     private StorageController storageController;
+    // effects: create entry
 
     public static void chooseGoal(PhysicalInfo physicalInfo, StorageController storageController) {
         JFrame frame = new JFrame("Please choose your goal");
@@ -36,6 +38,7 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
         frame.setVisible(true);
     }
 
+    // effects: choose fitness goal GUI
     public FitnessGoalEntry(PhysicalInfo physicalInfo, StorageController storageController) {
         this.physicalInfo = physicalInfo;
         this.storageController = storageController;
@@ -56,6 +59,7 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
 
     }
 
+    //EFFECTS: actionlistener for the buttons
     private void listeners(PhysicalInfo physicalInfo, StorageController storageController) {
         ActionListener b1Listener = new ActionListener() {
             @Override

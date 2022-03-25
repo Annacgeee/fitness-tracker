@@ -1,25 +1,17 @@
 {
     "name": "Today's Calories",
-    "remainingCalories": 1000,
+    "remainingCalories": 1200,
     "foodItems": [
         {
-            "name": "egg",
+            "name": "efs",
             "calories": 100
         },
         {
-            "name": "egg",
+            "name": "dsfdf",
             "calories": 100
         },
         {
-            "name": "egg",
-            "calories": 100
-        },
-        {
-            "name": "egg",
-            "calories": 100
-        },
-        {
-            "name": "eeeee",
+            "name": "sdf",
             "calories": 100
         }
     ]

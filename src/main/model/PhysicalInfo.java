@@ -18,7 +18,6 @@ public class PhysicalInfo implements Writable {
     private int height;
 
 
-
     private double caloriesNeeded;
     private static int caloriesNeededToLoseOneKG = 7700;// to lose 1kg, people must have 7700 calories deficit
     private ArrayList<Double> kgToLosePerWeek; // create a list to store week lose weight goal in kg
@@ -41,7 +40,7 @@ public class PhysicalInfo implements Writable {
         kgToLosePerWeek.add(1.0);
     }
 
-     //construct another constructor for json to use
+    //construct another constructor for json to use
     public PhysicalInfo(double w, int h, int age, boolean gender, double caloriesNeeded) {
         this.weight = w;
         this.height = h;
@@ -88,13 +87,9 @@ public class PhysicalInfo implements Writable {
     //EFFECTS:return string representation of physical info
     public String toString() {
         String genderStr = gender ? "female" : "male";
-        return "Your physical information is "
-                + " :" +  "\n weight is "
-                + weight + "\n height is "
-                + height + "\n age is "
-                + age + "\n gender is "
-                + genderStr + "\n you need "
-                + caloriesNeeded + " calories";
+        return  "<html>" + "Weight: " + weight + "<br>"
+                + "Height: " + height + "<br>"
+                + "Gender :" + genderStr + "<br>" + "Age: " + age + "</html>";
     }
 
     @Override
@@ -121,7 +116,6 @@ public class PhysicalInfo implements Writable {
     }
 
 
-
     //REQUIRES: user has valid input
     //MODIFIES: this
     //EFFECT: calculate how many calories does the user need (for lose weight) according to user's physical info input.
@@ -136,7 +130,6 @@ public class PhysicalInfo implements Writable {
                     - ((caloriesNeededToLoseOneKG * kgToLosePerWeek.get(mySelect - 1)) / 7);
         }
     }
-
 
 
 }
