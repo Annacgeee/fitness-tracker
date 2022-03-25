@@ -80,6 +80,26 @@ public class PhysicalInfoTest {
         "\n you need 0.0 calories", personA.toString());
     }
 
+    @Test
+    void testToStringMale() {
+        personB.toString();
+        assertEquals("Your physical information is  :" +
+                "\n weight is 80.0" +
+                "\n height is 180" +
+                "\n age is 35" +
+                "\n gender is male" +
+                "\n you need 0.0 calories", personB.toString());
+    }
+
+    @Test
+    void testPhysicalInfoTest() {
+        personA.setPhysicalInfo(90,160,22,false);
+        assertEquals(22,personA.getAge());
+        assertEquals(90,personA.getWeight());
+        assertEquals(160,personA.getHeight());
+        assertEquals(false, personA.getGender());
+    }
+
 
 }
 

@@ -47,6 +47,13 @@ public class DailyConsumptionTest {
     }
 
     @Test
+    public void testRemainingIsZero() {
+        mondayConsumption = new DailyConsumption("monday", 0);
+        mondayConsumption.addFoodItem(chocolate);
+        assertEquals(0,mondayConsumption.getRemainingCalories());
+    }
+
+    @Test
     public void testAddFoodItemForRemainingIsNotZero() {
 
         assertTrue(mondayConsumption.getFoodItem().isEmpty());
