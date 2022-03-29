@@ -42,6 +42,8 @@ public class DailyConsumption implements Writable {
         } else {
             this.remainingCalories = remainingCalories - foodItem.getCalories();
         }
+        EventLog.getInstance().logEvent(new Event(foodItem.getFoodName()
+                + " is added to today's food intake list"));
     }
 
     //EFFECTS: returns an unmodifiable list of fooditems in this daily consumption

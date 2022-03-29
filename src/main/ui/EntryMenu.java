@@ -1,17 +1,19 @@
 package ui;
 
 import model.DailyConsumption;
+import model.Event;
+import model.EventLog;
 import model.PhysicalInfo;
+import model.exception.LogException;
 import ui.StorageController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.Iterator;
 
 import static ui.AddFoodItemGUI.createAndShowGUI;
 //import static ui.FitnessAppGUI.createAndShowGUI;
@@ -35,12 +37,24 @@ public class EntryMenu extends JPanel implements ActionListener {
 
         //Create and set up the window.
         JFrame frame = new JFrame("Main Menu");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         //Create and set up the content pane.
         EntryMenu newContentPane = new EntryMenu();
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Iterator<Event> eventIter = EventLog.getInstance().iterator();
+                while (eventIter.hasNext()) {
+                    System.out.println(eventIter.next().toString());
+                }
+                System.exit(0);
+            }
+        });
+
 
 
         //frame.add
@@ -140,12 +154,6 @@ public class EntryMenu extends JPanel implements ActionListener {
                 JLabel physicalInfoLabel = new JLabel();
                 physicalInfoLabel.setText(physicalInfo.toString());
 
-                        /*
-                        "<html>" + "Weight: " + physicalInfo.getWeight() + "<br>"
-                        + "Height: " + physicalInfo.getHeight() + "<br>"
-                        + "Gender :" + physicalInfo.getGender() + "<br>" + "Age: " + physicalInfo.getAge() + "</html>");
-
-                         */
 
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(400, 400);
@@ -158,6 +166,9 @@ public class EntryMenu extends JPanel implements ActionListener {
         };
         b4.addActionListener(b4Listener);
     }
+
+
+
 
 
 
@@ -188,6 +199,9 @@ public class EntryMenu extends JPanel implements ActionListener {
         frame.setVisible(true);
 
     }
+
+
+
 
 
 }

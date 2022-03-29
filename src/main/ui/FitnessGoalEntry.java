@@ -1,14 +1,15 @@
 package ui;
 
 import model.DailyConsumption;
+import model.Event;
+import model.EventLog;
 import model.PhysicalInfo;
 
 import javax.swing.*;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 
 //import static ui.FitnessAppGUI.createAndShowGUI;
 import static ui.MenuGUI.displayUserMenu;
@@ -26,12 +27,22 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
 
     public static void chooseGoal(PhysicalInfo physicalInfo, StorageController storageController) {
         JFrame frame = new JFrame("Please choose your goal");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         //Create and set up the content pane.
         FitnessGoalEntry newContentPane = new FitnessGoalEntry(physicalInfo, storageController);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Iterator<Event> eventIter = EventLog.getInstance().iterator();
+                while (eventIter.hasNext()) {
+                    System.out.println(eventIter.next().toString());
+                }
+                System.exit(0);
+            }
+        });
 
         //Display the window.
         frame.pack();

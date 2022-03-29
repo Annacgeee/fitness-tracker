@@ -1,18 +1,8 @@
 {
     "name": "Today's Calories",
-    "remainingCalories": 1200,
-    "foodItems": [
-        {
-            "name": "efs",
-            "calories": 100
-        },
-        {
-            "name": "dsfdf",
-            "calories": 100
-        },
-        {
-            "name": "sdf",
-            "calories": 100
-        }
-    ]
+    "remainingCalories": 1400,
+    "foodItems": [{
+        "name": "dsf",
+        "calories": 100
+    }]
 }

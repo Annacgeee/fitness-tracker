@@ -1,14 +1,14 @@
 package ui;
 
 import model.DailyConsumption;
+import model.Event;
+import model.EventLog;
 import model.PhysicalInfo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
+import java.util.Iterator;
 
 import static ui.FitnessGoalEntry.chooseGoal;
 //Cite from https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html Label demo
@@ -28,13 +28,23 @@ public class MenuGUI extends JPanel implements ActionListener, FocusListener {
     static void displayUserMenu(PhysicalInfo physicalInfo, StorageController storageController) {
         //Create and set up the window.
         JFrame frame = new JFrame("Please input your physical information");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         //Display the window.
 
         MenuGUI newContentPane = new MenuGUI(physicalInfo, storageController);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Iterator<Event> eventIter = EventLog.getInstance().iterator();
+                while (eventIter.hasNext()) {
+                    System.out.println(eventIter.next().toString());
+                }
+                System.exit(0);
+            }
+        });
 
         frame.pack();
         frame.setVisible(true);

@@ -1,7 +1,11 @@
 package ui;
 
 import model.DailyConsumption;
+import model.Event;
+import model.EventLog;
 import model.FoodItem;
+import model.exception.LogException;
+import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -11,7 +15,10 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 
 //Cite from https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html listDemo
 public class AddFoodItemGUI extends JPanel
@@ -32,12 +39,22 @@ public class AddFoodItemGUI extends JPanel
             throws FileNotFoundException {
         //Create and set up the window.
         JFrame frame = new JFrame("food list");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         //Create and set up the content pane.
         JComponent newContentPane = new AddFoodItemGUI(dailyConsumption, storageController);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Iterator<Event> eventIter = EventLog.getInstance().iterator();
+                while (eventIter.hasNext()) {
+                    System.out.println(eventIter.next().toString());
+                }
+                System.exit(0);
+            }
+        });
 
         //Display the window.
         frame.pack();
@@ -130,13 +147,6 @@ public class AddFoodItemGUI extends JPanel
             FoodItem inputFoodItem = new FoodItem(name, 100);
             dailyConsumption.addFoodItem(inputFoodItem);
 
-            //User didn't type in a unique name...
-            if (name.equals("") || alreadyInList(name)) {
-                Toolkit.getDefaultToolkit().beep();
-                foodName.requestFocusInWindow();
-                foodName.selectAll();
-                return;
-            }
 
 
             listModel.insertElementAt(foodName.getText(), listModel.getSize());
