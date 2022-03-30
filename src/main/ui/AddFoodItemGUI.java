@@ -25,8 +25,10 @@ public class AddFoodItemGUI extends JPanel
         implements ListSelectionListener {
     private JList list;
     private JButton saveButton;
+    private JButton removeButton;
     private static final String AddString = "Add";
     private static final String saveString = "Save";
+    private static final String removeString = "remove";
     private JTextField foodName;
     private DefaultListModel listModel;
     private DailyConsumption dailyConsumption;
@@ -48,9 +50,9 @@ public class AddFoodItemGUI extends JPanel
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                Iterator<Event> eventIter = EventLog.getInstance().iterator();
-                while (eventIter.hasNext()) {
-                    System.out.println(eventIter.next().toString());
+                Iterator<Event> eventIterator = EventLog.getInstance().iterator();
+                while (eventIterator.hasNext()) {
+                    System.out.println(eventIterator.next().toString());
                 }
                 System.exit(0);
             }
@@ -89,6 +91,11 @@ public class AddFoodItemGUI extends JPanel
         saveButton.setActionCommand("save");
         saveButton.addActionListener(new AddFoodItemGUI.SaveListener());
 
+        removeButton = new JButton(removeString);
+        //removeButton.setActionCommand("remove");
+        removeButton.addActionListener(new RemoveListener());
+
+
         //Create a panel that uses boxlayout.
         createPanel(listScrollPane, addButton);
     }
@@ -106,6 +113,7 @@ public class AddFoodItemGUI extends JPanel
         buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(foodName);
+        buttonPane.add(removeButton);
 
         buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         add(listScrollPane, BorderLayout.CENTER);
@@ -118,18 +126,47 @@ public class AddFoodItemGUI extends JPanel
     }
 
 
-    // EFFECTS: action listerner for the button
+    // EFFECTS: action listener for the button
     class SaveListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            dailyConsumption.saveFoodList();
             storageController.saveDailyConsumption(dailyConsumption);
-
-
-
-
         }
     }
 
-    // EFFECTS: action listerner for the button
+    public class RemoveListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String selectedFood = list.getSelectedValue().toString();
+            dailyConsumption.removeFoodItem(selectedFood);
+
+
+
+
+            int index = list.getSelectedIndex();
+            listModel.remove(index);
+
+            int size = listModel.getSize();
+
+            if (size == 0) { //Nobody's left, disable firing.
+                removeButton.setEnabled(false);
+
+            } else { //Select an index.
+                if (index == listModel.getSize()) {
+                    //removed item in last position
+                    index--;
+                }
+
+                list.setSelectedIndex(index);
+                list.ensureIndexIsVisible(index);
+            }
+        }
+
+    }
+
+
+    // EFFECTS: action listener for the button
     public class AddListener implements ActionListener, DocumentListener {
         private boolean alreadyEnabled = false;
         private JButton button;
@@ -146,7 +183,6 @@ public class AddFoodItemGUI extends JPanel
             //add user input to daily consumption's foodList
             FoodItem inputFoodItem = new FoodItem(name, 100);
             dailyConsumption.addFoodItem(inputFoodItem);
-
 
 
             listModel.insertElementAt(foodName.getText(), listModel.getSize());

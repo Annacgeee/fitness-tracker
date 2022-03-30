@@ -39,22 +39,7 @@ public class FoodItem implements Writable {
     public String toString() {
         return foodName + " : " + calories;
     }
-/*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        } else if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FoodItem foodItem = (FoodItem) o;
-        return calories == foodItem.calories && Objects.equals(foodName, foodItem.foodName);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(foodName, calories);
-    }
 
- */
+
 }

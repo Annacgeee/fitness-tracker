@@ -86,7 +86,7 @@ public class StorageController {
             jsonWriter.open();
             jsonWriter.write(dailyConsumption);
             jsonWriter.close();
-            System.out.println("Saved " + dailyConsumption.getName() + " to " + JSON_STORE);
+            //System.out.println("Saved " + dailyConsumption.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }

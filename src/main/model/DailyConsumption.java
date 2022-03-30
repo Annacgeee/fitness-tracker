@@ -30,7 +30,7 @@ public class DailyConsumption implements Writable {
 
 
     //MODIFIES: this
-    //EFFECT: when a food is added, the food item list should be updated with the food, also the remaining calories
+    //EFFECT: when  food is added, the food item list should be updated with the food, also the remaining calories
     // should be reduced by the calories of the food, if the remaining calories is already zero,then it won't change.
     // if there is not enough remaining calories to add food, the remaining calories will be zero after add the food.
     public void addFoodItem(FoodItem foodItem) {
@@ -46,13 +46,13 @@ public class DailyConsumption implements Writable {
                 + " is added to today's food intake list"));
     }
 
-    //EFFECTS: returns an unmodifiable list of fooditems in this daily consumption
+    //EFFECTS: returns an unmodifiable list of food items in this daily consumption
     //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public List<FoodItem> getFoodItem() {
         return Collections.unmodifiableList(foodItems);
     }
 
-    //EFFECTS: returns number of fooditems in this daily consumption
+    //EFFECTS: returns number of food items in this daily consumption
     //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public int numFoodItems() {
         return foodItems.size();
@@ -62,6 +62,21 @@ public class DailyConsumption implements Writable {
     //EFFECTS:return the current remaining calories
     public double getRemainingCalories() {
         return this.remainingCalories;
+    }
+
+    public void removeFoodItem(String foodItem) {
+        for (FoodItem next : foodItems) {
+            if (next.getFoodName() == foodItem) {
+                foodItems.remove(next);
+            }
+        }
+
+        EventLog.getInstance().logEvent(new Event(foodItem + " is removed from the list"));
+
+    }
+
+    public void saveFoodList() {
+        EventLog.getInstance().logEvent(new Event("Your food items have been saved to today's food list"));
     }
 
 

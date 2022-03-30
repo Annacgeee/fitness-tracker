@@ -32,9 +32,9 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                Iterator<Event> eventIter = EventLog.getInstance().iterator();
-                while (eventIter.hasNext()) {
-                    System.out.println(eventIter.next().toString());
+                Iterator<Event> eventIterator = EventLog.getInstance().iterator();
+                while (eventIterator.hasNext()) {
+                    System.out.println(eventIterator.next().toString());
                 }
                 System.exit(0);
             }
@@ -45,7 +45,7 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         frame.setVisible(true);
     }
 
-    //EFFECTS: create goal seletor
+    //EFFECTS: prompt user to select goal
 
     public WeeklyGoalSelector(PhysicalInfo physicalInfo, StorageController storageController) {
         createButtons();
@@ -63,7 +63,7 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
 
     }
 
-    //EFFECTS: actionlistener for button
+    //EFFECTS: action listener for button
     private void b5ActionListener() {
         ActionListener b5Listener = new ActionListener() {
             @Override
@@ -78,7 +78,7 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         b5.addActionListener(b5Listener);
     }
 
-    // //EFFECTS: actionlistener for button
+    // //EFFECTS: action listener for button
 
 
     private void b4ActionListener(PhysicalInfo physicalInfo, StorageController storageController) {
@@ -96,13 +96,12 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 frame.setSize(300, 200);
                 frame.setVisible(true);
-                frame.add(label);
-                frame.addWindowListener(new WindowAdapter() {
+                frame.add(label);frame.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent e) {
-                        Iterator<Event> eventIter = EventLog.getInstance().iterator();
-                        while (eventIter.hasNext()) {
-                            System.out.println(eventIter.next().toString());
+                        Iterator<Event> eventIterator = EventLog.getInstance().iterator();
+                        while (eventIterator.hasNext()) {
+                            System.out.println(eventIterator.next().toString());
                         }
                         System.exit(0);
                     }
@@ -112,7 +111,7 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         b4.addActionListener(b4Listener);
     }
 
-    //EFFECTS: actionlistener for button
+    //EFFECTS: action listener for button
 
     private void b3ActionListener(PhysicalInfo physicalInfo, StorageController storageController) {
         ActionListener b3Listener = new ActionListener() {
@@ -131,13 +130,12 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 frame.setSize(300, 200);
                 frame.setVisible(true);
-                frame.add(label);
-                frame.addWindowListener(new WindowAdapter() {
+                frame.add(label);frame.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent e) {
-                        Iterator<Event> eventIter = EventLog.getInstance().iterator();
-                        while (eventIter.hasNext()) {
-                            System.out.println(eventIter.next().toString());
+                        Iterator<Event> eventIterator = EventLog.getInstance().iterator();
+                        while (eventIterator.hasNext()) {
+                            System.out.println(eventIterator.next().toString());
                         }
                         System.exit(0);
                     }
@@ -147,7 +145,7 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         b3.addActionListener(b3Listener);
     }
 
-    //EFFECTS: actionlistener for button
+    //EFFECTS: action listener for button
 
     private void b2ActionListener(PhysicalInfo physicalInfo, StorageController storageController) {
         ActionListener b2Listener = new ActionListener() {
@@ -164,13 +162,12 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 frame.setSize(300, 200);
                 frame.setVisible(true);
-                frame.add(label);
-                frame.addWindowListener(new WindowAdapter() {
+                frame.add(label);frame.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent e) {
-                        Iterator<Event> eventIter = EventLog.getInstance().iterator();
-                        while (eventIter.hasNext()) {
-                            System.out.println(eventIter.next().toString());
+                        Iterator<Event> eventIterator = EventLog.getInstance().iterator();
+                        while (eventIterator.hasNext()) {
+                            System.out.println(eventIterator.next().toString());
                         }
                         System.exit(0);
                     }
@@ -180,7 +177,7 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         b2.addActionListener(b2Listener);
     }
 
-    //EFFECTS: actionlistener for button
+    //EFFECTS: action listener for button
 
     private void b1ActionListener(PhysicalInfo physicalInfo, StorageController storageController) {
         ActionListener b1Listener = new ActionListener() {
@@ -198,13 +195,12 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 frame.setSize(300, 200);
                 frame.setVisible(true);
-                frame.add(label);
-                frame.addWindowListener(new WindowAdapter() {
+                frame.add(label);frame.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent e) {
-                        Iterator<Event> eventIter = EventLog.getInstance().iterator();
-                        while (eventIter.hasNext()) {
-                            System.out.println(eventIter.next().toString());
+                        Iterator<Event> eventIterator = EventLog.getInstance().iterator();
+                        while (eventIterator.hasNext()) {
+                            System.out.println(eventIterator.next().toString());
                         }
                         System.exit(0);
                     }

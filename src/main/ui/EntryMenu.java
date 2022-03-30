@@ -47,9 +47,9 @@ public class EntryMenu extends JPanel implements ActionListener {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                Iterator<Event> eventIter = EventLog.getInstance().iterator();
-                while (eventIter.hasNext()) {
-                    System.out.println(eventIter.next().toString());
+                Iterator<Event> eventIterator = EventLog.getInstance().iterator();
+                while (eventIterator.hasNext()) {
+                    System.out.println(eventIterator.next().toString());
                 }
                 System.exit(0);
             }
@@ -155,23 +155,31 @@ public class EntryMenu extends JPanel implements ActionListener {
                 physicalInfoLabel.setText(physicalInfo.toString());
 
 
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(400, 400);
-                frame.setVisible(true);
-                frame.add(label);
-                frame.add(physicalInfoLabel);
-                //frame.pack();
+                frameSet(frame, label, physicalInfoLabel);
+                frame.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        Iterator<Event> eventIterator = EventLog.getInstance().iterator();
+                        while (eventIterator.hasNext()) {
+                            System.out.println(eventIterator.next().toString());
+                        }
+                        System.exit(0);
+                    }
+                });
+
 
             }
         };
         b4.addActionListener(b4Listener);
     }
 
-
-
-
-
-
+    private void frameSet(JFrame frame, JLabel label, JLabel physicalInfoLabel) {
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setSize(400, 400);
+        frame.setVisible(true);
+        frame.add(label);
+        frame.add(physicalInfoLabel);
+    }
 
 
     @Override
@@ -182,7 +190,7 @@ public class EntryMenu extends JPanel implements ActionListener {
 
     public void displayRemainingCalories() {
         frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         JLabel label = new JLabel("your remaining calories is");
         JLabel label1 = new JLabel(Double.toString(dailyConsumption.getRemainingCalories()));
@@ -197,6 +205,16 @@ public class EntryMenu extends JPanel implements ActionListener {
 
 
         frame.setVisible(true);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Iterator<Event> eventIterator = EventLog.getInstance().iterator();
+                while (eventIterator.hasNext()) {
+                    System.out.println(eventIterator.next().toString());
+                }
+                System.exit(0);
+            }
+        });
 
     }
 
