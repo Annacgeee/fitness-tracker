@@ -1,13 +1,17 @@
 {
     "name": "Today's Calories",
-    "remainingCalories": 1300,
+    "remainingCalories": 1200,
     "foodItems": [
         {
-            "name": "sdf",
+            "name": "egg",
             "calories": 100
         },
         {
-            "name": "sdf",
+            "name": "oats",
+            "calories": 100
+        },
+        {
+            "name": "strawberry",
             "calories": 100
         }
     ]

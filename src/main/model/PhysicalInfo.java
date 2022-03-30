@@ -93,7 +93,7 @@ public class PhysicalInfo implements Writable {
     }
 
     @Override
-    // EFFECTS: turn it to Jsonobject
+    // EFFECTS: turn it to Json object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("weight", weight);

@@ -28,3 +28,22 @@
 - As a user, I want to add a Food item to Daily Consumption
 - As a user, I want to save my food list and physical info to file
 - As a user, I want to be able to load my food list and physical info from file 
+
+## Phase 4: task 2
+Wed Mar 30 00:07:09 PDT 2022  
+egg is added to today's food intake list  
+Wed Mar 30 00:07:12 PDT 2022  
+oats is added to today's food intake list  
+Wed Mar 30 00:07:17 PDT 2022  
+strawberry is added to today's food intake list  
+Wed Mar 30 00:07:18 PDT 2022  
+Your food items have been saved to today's food list  
+
+##Phase 4: Task 3
+- I designed three classes to track user physical info, daily consumption and food item, but some methods inside each 
+class is not strictly about the class, I should spend more time on refactor methods 
+- I did not use any interface or abstract class, however, there are many repetitive code inside the three class I 
+designed I should extract them out and make it an abstract class to make the code cleaner
+- Also, the classes under persistence package can also be extracted out an interface or abstract class
+- For my ui package, the name for each class is a bit sus, it should be renamed. Also, some behavior are repetitive 
+inside each class, and should be refactored
