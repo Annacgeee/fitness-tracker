@@ -194,16 +194,13 @@ public class AddFoodItemGUI extends JPanel
 
 
             listModel.insertElementAt(foodName.getText(), listModel.getSize());
-            //If we just wanted to add to the end, we'd do this:
-            //listModel.addElement(foodName.getText());
+
 
             //Reset the text field.
             foodName.requestFocusInWindow();
             foodName.setText("");
 
-            //Select the new item and make it visible.
-            //list.setSelectedIndex(index);
-            //list.ensureIndexIsVisible(index);
+
         }
 
 
