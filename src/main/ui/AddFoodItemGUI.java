@@ -149,6 +149,7 @@ public class AddFoodItemGUI extends JPanel
         public void actionPerformed(ActionEvent e) {
             String selectedFood = list.getSelectedValue().toString();
             dailyConsumption.removeFoodItem(selectedFood);
+            storageController.saveDailyConsumption(dailyConsumption);
 
 
             int index = list.getSelectedIndex();
@@ -189,7 +190,7 @@ public class AddFoodItemGUI extends JPanel
 
             //add user input to daily consumption's foodList
             FoodItem inputFoodItem = new FoodItem(name, 100);
-            dailyConsumption.addFoodItem(inputFoodItem);
+            dailyConsumption.addFoodItemManually(inputFoodItem);
 
 
             listModel.insertElementAt(foodName.getText(), listModel.getSize());

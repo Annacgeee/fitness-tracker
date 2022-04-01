@@ -39,11 +39,18 @@ oat is added to today's food intake list
 Fri Apr 01 02:19:26 PDT 2022  
 apple is removed from the list  
 
+only add and remove behavior will be logged, any other behavior will not be included in logevent  
+so if user did not use add and remove, nothing will be logged 
+
 ##Phase 4: Task 3
 - I designed three classes to track user physical info, daily consumption and food item, but some methods inside each 
-class is not strictly about the class, I should spend more time on refactor methods 
-- I did not use any interface or abstract class, however, there are many repetitive code inside the three class I 
+class is not strictly about the class, I should spend more time on refactor methods to other class that support the   
+behavior
+- I did not use any interface or abstract class, however, there are many repetitive code inside the ui  I 
 designed I should extract them out and make it an abstract class to make the code cleaner
-- Also, the classes under persistence package can also be extracted out an interface or abstract class
+- Also, the classes under persistence package can also be minimized to only json reader and json writer
 - For my ui package, the name for each class is a bit sus, it should be renamed. Also, some behavior are repetitive 
 inside each class, and should be refactored
+- the parameter and the field of the three class also has some issues, which causes difficulties of coding for later   
+project phase, such as in daily consumption, remaining calories should not be parameter
+- I did not have any exceptions for users input, which is not good practice

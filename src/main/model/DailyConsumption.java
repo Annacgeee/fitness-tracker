@@ -42,6 +42,10 @@ public class DailyConsumption implements Writable {
         } else {
             this.remainingCalories = remainingCalories - foodItem.getCalories();
         }
+    }
+
+    public void addFoodItemManually(FoodItem foodItem) {
+        addFoodItem(foodItem);
         EventLog.getInstance().logEvent(new Event(foodItem.getFoodName()
                 + " is added to today's food intake list"));
     }
@@ -66,8 +70,9 @@ public class DailyConsumption implements Writable {
 
     public void removeFoodItem(String foodItem) {
         for (FoodItem next : foodItems) {
-            if (next.getFoodName() == foodItem) {
+            if (next.getFoodName().equals(foodItem)) {
                 foodItems.remove(next);
+                break;
             }
         }
 
