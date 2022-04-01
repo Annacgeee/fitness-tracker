@@ -19,10 +19,10 @@ import static ui.WeeklyGoalSelector.chooseWeeklyGoal;
 public class FitnessGoalEntry extends JPanel implements ActionListener {
     private JButton b1;
     private JButton b2;
-    private MenuGUI menuGUI;
-    private PhysicalInfo physicalInfo;
-    private DailyConsumption dailyConsumption;
-    private StorageController storageController;
+//    private MenuGUI menuGUI;
+//    private PhysicalInfo physicalInfo;
+//    private DailyConsumption dailyConsumption;
+//    private StorageController storageController;
     // effects: create entry
 
     public static void chooseGoal(PhysicalInfo physicalInfo, StorageController storageController) {
@@ -51,8 +51,8 @@ public class FitnessGoalEntry extends JPanel implements ActionListener {
 
     // effects: choose fitness goal GUI
     public FitnessGoalEntry(PhysicalInfo physicalInfo, StorageController storageController) {
-        this.physicalInfo = physicalInfo;
-        this.storageController = storageController;
+//        this.physicalInfo = physicalInfo;
+//        this.storageController = storageController;
 
         b1 = new JButton("I want to maintain weight");
         b1.setVerticalTextPosition(AbstractButton.CENTER);

@@ -30,14 +30,14 @@
 - As a user, I want to be able to load my food list and physical info from file 
 
 ## Phase 4: task 2
-Wed Mar 30 00:07:09 PDT 2022  
+Fri Apr 01 02:19:14 PDT 2022  
 egg is added to today's food intake list  
-Wed Mar 30 00:07:12 PDT 2022  
-oats is added to today's food intake list  
-Wed Mar 30 00:07:17 PDT 2022  
-strawberry is added to today's food intake list  
-Wed Mar 30 00:07:18 PDT 2022  
-Your food items have been saved to today's food list  
+Fri Apr 01 02:19:20 PDT 2022  
+apple is added to today's food intake list  
+Fri Apr 01 02:19:23 PDT 2022  
+oat is added to today's food intake list  
+Fri Apr 01 02:19:26 PDT 2022  
+apple is removed from the list  
 
 ##Phase 4: Task 3
 - I designed three classes to track user physical info, daily consumption and food item, but some methods inside each 

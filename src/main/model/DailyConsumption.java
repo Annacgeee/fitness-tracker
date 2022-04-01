@@ -101,6 +101,6 @@ public class DailyConsumption implements Writable {
         }
 
         return jsonArray;
-
     }
+
 }

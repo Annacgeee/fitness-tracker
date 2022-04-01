@@ -18,7 +18,7 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
     private JButton b2;
     private JButton b3;
     private JButton b4;
-    private JButton b5;
+    //private JButton b5;
 
 
     public static void chooseWeeklyGoal(PhysicalInfo physicalInfo, StorageController storageController) {
@@ -58,25 +58,25 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
 
         b4ActionListener(physicalInfo, storageController);
 
-        b5ActionListener();
+        //b5ActionListener();
 
 
     }
 
     //EFFECTS: action listener for button
-    private void b5ActionListener() {
-        ActionListener b5Listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    showMenuEntry();
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        };
-        b5.addActionListener(b5Listener);
-    }
+//    private void b5ActionListener() {
+//        ActionListener b5Listener = new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                try {
+//                    showMenuEntry(physicalInfo,storageController,dailyConsumption));
+//                } catch (FileNotFoundException ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//        };
+//        b5.addActionListener(b5Listener);
+//    }
 
     // //EFFECTS: action listener for button
 
@@ -231,16 +231,16 @@ public class WeeklyGoalSelector extends JPanel implements ActionListener {
         b4.setVerticalTextPosition(AbstractButton.CENTER);
         b4.setMnemonic(KeyEvent.VK_D);
 
-        b5 = new JButton("Back to main page");
-        b5.setVerticalTextPosition(AbstractButton.CENTER);
-        b5.setMnemonic(KeyEvent.VK_D);
+//        b5 = new JButton("Back to main page");
+//        b5.setVerticalTextPosition(AbstractButton.CENTER);
+//        b5.setMnemonic(KeyEvent.VK_D);
 
 
         add(b1);
         add(b2);
         add(b3);
         add(b4);
-        add(b5);
+        //add(b5);
     }
 
 

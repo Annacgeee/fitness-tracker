@@ -1,9 +1,7 @@
 package ui;
 
-import model.DailyConsumption;
+import model.*;
 import model.Event;
-import model.EventLog;
-import model.PhysicalInfo;
 import model.exception.LogException;
 import ui.StorageController;
 
@@ -14,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 
 import static ui.AddFoodItemGUI.createAndShowGUI;
 //import static ui.FitnessAppGUI.createAndShowGUI;
@@ -39,10 +38,13 @@ public class EntryMenu extends JPanel implements ActionListener {
         JFrame frame = new JFrame("Main Menu");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
+
         //Create and set up the content pane.
         EntryMenu newContentPane = new EntryMenu();
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
+
+
 
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -64,11 +66,16 @@ public class EntryMenu extends JPanel implements ActionListener {
         frame.setVisible(true);
     }
 
-    public EntryMenu() throws FileNotFoundException {
 
-        physicalInfo = new PhysicalInfo(0, 0, 0, false, 0);
-        dailyConsumption = new DailyConsumption("Today's Calories", 1500);
-        storageController = new StorageController();
+
+    public EntryMenu()
+            throws FileNotFoundException {
+
+
+        this.physicalInfo = new PhysicalInfo(999,0,0,false,1);
+        this.dailyConsumption = new DailyConsumption("",0);
+        this.storageController = new StorageController();
+
 
         b1 = new JButton("Register my physical information");
         b1.setVerticalTextPosition(AbstractButton.CENTER);
@@ -82,7 +89,7 @@ public class EntryMenu extends JPanel implements ActionListener {
         b3.setVerticalTextPosition(AbstractButton.CENTER);
         b3.setMnemonic(KeyEvent.VK_D);
 
-        b4 = new JButton("Load my profile");
+        b4 = new JButton("load my profile");
         b4.setVerticalTextPosition(AbstractButton.CENTER);
         b4.setMnemonic(KeyEvent.VK_D);
 
@@ -117,6 +124,8 @@ public class EntryMenu extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                //storageController.loadPhysicalInfo();
+
                 displayRemainingCalories();
 
             }
@@ -141,36 +150,43 @@ public class EntryMenu extends JPanel implements ActionListener {
     }
 
     private void labelListener() {
+
         ActionListener b4Listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dailyConsumption = storageController.loadDailyConsumption();
+                physicalInfo = storageController.loadPhysicalInfo();
                 JFrame frame = new JFrame();
-
-
                 JLabel label = new JLabel();
-                label.setText("You have consumed: " + dailyConsumption.getFoodItem());
+                label.setText("You have consumed: " + dailyConsumption.getFoodItem().toString());
+
+
                 label.setBounds(0, 30, 400, 50);
                 JLabel physicalInfoLabel = new JLabel();
                 physicalInfoLabel.setText(physicalInfo.toString());
-
-
                 frameSet(frame, label, physicalInfoLabel);
-                frame.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        Iterator<Event> eventIterator = EventLog.getInstance().iterator();
-                        while (eventIterator.hasNext()) {
-                            System.out.println(eventIterator.next().toString());
-                        }
-                        System.exit(0);
-                    }
-                });
+
+                windowListener(frame);
 
 
             }
         };
         b4.addActionListener(b4Listener);
+    }
+
+    private void windowListener(JFrame frame) {
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Iterator<Event> eventIterator = EventLog.getInstance().iterator();
+                while (eventIterator.hasNext()) {
+                    System.out.println(eventIterator.next().toString());
+                }
+
+
+                System.exit(0);
+            }
+        });
     }
 
     private void frameSet(JFrame frame, JLabel label, JLabel physicalInfoLabel) {
@@ -193,7 +209,10 @@ public class EntryMenu extends JPanel implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         JLabel label = new JLabel("your remaining calories is");
-        JLabel label1 = new JLabel(Double.toString(dailyConsumption.getRemainingCalories()));
+        //dailyConsumption = storageController.loadDailyConsumption();
+        double remainingCal = dailyConsumption.getRemainingCalories();
+        JLabel label1 = new JLabel(Double.toString(remainingCal));
+
 
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(300, 100));

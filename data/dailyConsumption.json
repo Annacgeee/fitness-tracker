@@ -1,17 +1,13 @@
 {
-    "name": "Today's Calories",
-    "remainingCalories": 1200,
+    "name": "",
+    "remainingCalories": 0,
     "foodItems": [
         {
-            "name": "egg",
+            "name": "ttt",
             "calories": 100
         },
         {
-            "name": "oats",
-            "calories": 100
-        },
-        {
-            "name": "strawberry",
+            "name": "dddd",
             "calories": 100
         }
     ]

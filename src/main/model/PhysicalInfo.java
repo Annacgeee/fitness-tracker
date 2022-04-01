@@ -59,7 +59,7 @@ public class PhysicalInfo implements Writable {
         this.height = h;
         this.age = age;
         this.gender = gender;
-        //this.caloriesNeeded = caloriesNeeded;
+        this.caloriesNeeded = calculateCaloriesNeededForMaintainWeight();
 
     }
 

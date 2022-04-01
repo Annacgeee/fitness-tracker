@@ -1,5 +1,6 @@
 package ui;
 
+import model.FoodItem;
 import model.PhysicalInfo;
 import model.DailyConsumption;
 import persistence.JsonReader;
@@ -9,6 +10,8 @@ import persistence.JsonWriterPhysicalInfo;
 
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 
 
 // EFFECTS: class to keep data persistence
@@ -25,7 +28,6 @@ public class StorageController {
 
 
     public StorageController() {
-
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         physicalInfoWriter = new JsonWriterPhysicalInfo(physicalInfoJSON);
@@ -46,7 +48,7 @@ public class StorageController {
 
     }
 
-    /*
+
     //EFFECTS: load physical info
     public PhysicalInfo loadPhysicalInfo() {
         PhysicalInfo physicalInfo = null;
@@ -59,15 +61,12 @@ public class StorageController {
         return physicalInfo;
     }
 
-     */
 
+    //MODIFIES: this
+    // EFFECTS: prints all the food items in daily consumption to console
+    public void printFoodItems() {
 
-
-
-/*
-        //MODIFIES: this
-        // EFFECTS: prints all the food items in daily consumption to console
-        private void printFoodItems () {
+            /*
             if (dailyConsumption == null) {
                 System.out.println("No food items available");
                 return;
@@ -76,9 +75,9 @@ public class StorageController {
             for (FoodItem f : foodItemList) {
                 System.out.println(f.toString());
             }
-        }
+            */
+    }
 
- */
 
     //EFFECTS: save the food list to file
     public void saveDailyConsumption(DailyConsumption dailyConsumption) {
@@ -92,21 +91,21 @@ public class StorageController {
         }
     }
 
-        /*
 
-
-        //MODIFIES: this
-        //EFFECTS: loads daily consumption from file
-        private void loadDailyConsumption () {
-            try {
-                dailyConsumption = jsonReader.read();
-                System.out.println("Loaded " + dailyConsumption.getName() + " from " + JSON_STORE);
-            } catch (IOException e) {
-                System.out.println("Unable to read from file: " + JSON_STORE);
-            }
+    //MODIFIES: this
+    //EFFECTS: loads daily consumption from file
+    public DailyConsumption loadDailyConsumption() {
+        DailyConsumption dailyConsumption = null;
+        try {
+            dailyConsumption = jsonReader.read();
+            System.out.println("Loaded " + dailyConsumption.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
+        return dailyConsumption;
+    }
 
-
+/*
         // EFFECTS: prints all physical info to console
         private void printPhysicalInfo () {
             if (physicalInfo == null) {
@@ -116,11 +115,7 @@ public class StorageController {
             }
         }
 
-
-
-
-
-         */
+ */
 
 
 }

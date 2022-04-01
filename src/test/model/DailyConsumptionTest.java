@@ -91,4 +91,10 @@ public class DailyConsumptionTest {
         assertEquals(oatmeal,foodItems.get(0));
         assertEquals(chocolate,foodItems.get(1));
     }
+
+    @Test
+    public void removeFoodItem() {
+        foodItems.add(oatmeal);
+        mondayConsumption.removeFoodItem("oatmeal");
+    }
 }

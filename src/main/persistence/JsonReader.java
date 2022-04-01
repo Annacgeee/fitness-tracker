@@ -18,7 +18,6 @@ import java.util.stream.Stream;
 //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonReader {
     private String source;
-    private PhysicalInfo physicalInfo;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -58,7 +57,7 @@ public class JsonReader {
     }
 
     // MODIFIES: daily consumption
-    // EFFECTS: parses fooditems from JSON object and adds them to daily consumption
+    // EFFECTS: parses food items from JSON object and adds them to daily consumption
     //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     private void addFoodItems(DailyConsumption dc, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("foodItems");
@@ -69,7 +68,7 @@ public class JsonReader {
     }
 
     //MODIFIES: dc
-    // EFFECTS: parses fooditem from json object and add it to workroom
+    // EFFECTS: parses food item from json object and add it to workroom
     //cite from demo,https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     private void addFoodItem(DailyConsumption dc, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
@@ -79,5 +78,16 @@ public class JsonReader {
         FoodItem foodItem = new FoodItem(name,calories);
         dc.addFoodItem(foodItem);
     }
+
+/*
+    //Modifies: dc
+    //effects: parse food item from json object and remove it
+    private void removeFoodItem(DailyConsumption dc, JSONObject jsonObject) {
+        String name = jsonObject.getString("foodItem");
+        JSONArray jsonArray = jsonObject.getJSONArray("foodItems");
+        for (Object json : jsonArray) {
+        }
+    }
+ */
 
 }
